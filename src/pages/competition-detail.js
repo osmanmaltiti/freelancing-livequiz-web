@@ -1,10 +1,11 @@
-import React, { useState } from 'react'
+import React, { useState } from 'react';
+import image from '../Assets/R (1).png';
 
-const CompetitionDetial = () => {
+const CompetitionDetail = () => {
   const [ open, setOpen ] = useState(false);
   return (
-    <div className='relative w-full flex-grow flex flex-col gap-4 pb-4 items-center p-8'>
-        <img className='w-[8rem] aspect-square bg-red-300'/>
+    <div className='relative w-full flex-grow flex flex-col gap-4 pb-4 items-center p-8 bg-[#ffffff87]'>
+        <img src={image} className='w-[8rem] aspect-square'/>
         <h2>UEFA EURO Cup Winner</h2>
         <p>Labore eiusmod dolore duis duis ullamco est. Occaecat minim elit in laborum dolor aliqua laboris labore ex commodo nulla. Nisi laboris quis quis do cupidatat aliquip veniam quis. Cillum esse est dolore officia consectetur proident ea et enim ea amet ullamco ad. Occaecat ut enim sint esse excepteur adipisicing. Deserunt magna ut do cupidatat deserunt veniam voluptate exercitation. Nostrud anim ipsum fugiat reprehenderit fugiat.</p>
         <div className='grid grid-cols-3 gap-4'>
@@ -51,4 +52,4 @@ const CompetitionDetial = () => {
   )
 }
 
-export default CompetitionDetial
+export default CompetitionDetail

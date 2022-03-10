@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { useFormik } from 'formik';
 import Validate from '../components/validators';
 import SignInFunctions from '../functions/signin-function';
+import '../styles/App.css';
 
 const SignIn = () => {
     const [ toggle, setToggle ] = useState(false);
@@ -17,8 +18,8 @@ const SignIn = () => {
     const { state, toggleButton } = render();
   
     return (
-      <div className='w-screen h-screen flex flex-col bg-blue-50 md:bg-lightblue overflow-y-auto scrollbar-thin'>
-          <div className= 'bg-white flex flex-col flex-grow w-full py-6 m-auto items-center gap-8 lg:w-[70%] lg:h-[70%] lg:flex-grow-0'>
+      <div id='main-signin' className='w-screen h-screen flex flex-col bg-blue-50 md:bg-lightblue overflow-y-auto scrollbar-thin scrollba'>
+          <div style={{backgroundColor: '#ffffffab'}} className= ' flex flex-col flex-grow w-full py-6 m-auto items-center gap-8 lg:w-[70%] lg:flex-grow-0'>
           <h1 className='text-5xl font-bold'>Live Quiz</h1>
             { state }
             <button className='toggle-button m-auto mb-2 hover:text-cyan-500' 
