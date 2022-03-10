@@ -1,13 +1,15 @@
 import React, { useState } from 'react';
 import image from '../Assets/R (1).png';
+import { useNavigate } from 'react-router-dom';
 
 const CompetitionDetail = () => {
   const [ open, setOpen ] = useState(false);
+  const navigate = useNavigate();
   return (
     <div className='relative w-full flex-grow flex flex-col gap-4 pb-4 items-center p-8 bg-[#ffffff87]'>
         <img src={image} className='w-[8rem] aspect-square'/>
         <h2>UEFA EURO Cup Winner</h2>
-        <p>Labore eiusmod dolore duis duis ullamco est. Occaecat minim elit in laborum dolor aliqua laboris labore ex commodo nulla. Nisi laboris quis quis do cupidatat aliquip veniam quis. Cillum esse est dolore officia consectetur proident ea et enim ea amet ullamco ad. Occaecat ut enim sint esse excepteur adipisicing. Deserunt magna ut do cupidatat deserunt veniam voluptate exercitation. Nostrud anim ipsum fugiat reprehenderit fugiat.</p>
+        <p className='lg:w-[70ch]'>Labore eiusmod dolore duis duis ullamco est. Occaecat minim elit in laborum dolor aliqua laboris labore ex commodo nulla. Nisi laboris quis quis do cupidatat aliquip veniam quis. Cillum esse est dolore officia consectetur proident ea et enim ea amet ullamco ad. Occaecat ut enim sint esse excepteur adipisicing. Deserunt magna ut do cupidatat deserunt veniam voluptate exercitation. Nostrud anim ipsum fugiat reprehenderit fugiat.</p>
         <div className='grid grid-cols-3 gap-4'>
             <span className='flex flex-col items-center'>
                 <p>Hours</p>
@@ -30,17 +32,17 @@ const CompetitionDetail = () => {
 
         {/* POPUPS */}
         <div style={{backgroundColor: '#00000069'}} className={`${open ? 'flex' : 'hidden'} absolute top-0 left-0 flex-col bg-white w-screen h-full`}>
-            <div className='w-[70%] p-6 bg-white shadow-xl m-auto gap-16 flex flex-col items-center rounded-xl'>
+            <div className='w-[70%] lg:w-[50%] xl:w[40%] 2xl:w-[30%] p-6 bg-white shadow-xl m-auto gap-16 flex flex-col items-center rounded-xl'>
                 <p className='text-3xl font-bold text-center'>Are you sure you want to use a Gold Pass? </p>
                 <span className='flex flex-col gap-2 w-[70%]'>
-                    <button className='bg-green-500 py-2 rounded-md text-white font-semibold' >Yes</button>
+                    <button className='bg-green-500 py-2 rounded-md text-white font-semibold' onClick={() => navigate('/quiz')} >Yes</button>
                     <button className='bg-red-500 py-2 rounded-md text-white font-semibold' onClick={() => setOpen(!open)}>No</button>
                 </span>
             </div>
         </div>
         {/* NO GOLD PASS */}
-        <div style={{backgroundColor: '#00000069'}} className={`${open ? 'flex' : 'hidden'} absolute top-0 left-0 flex-col bg-white w-screen h-full`}>
-            <div className='w-[70%] p-6 bg-white shadow-xl m-auto gap-16 flex flex-col items-center rounded-xl'>
+        <div style={{backgroundColor: '#00000069'}} className={`${open ? 'hidden' : 'hidden'} absolute top-0 left-0 flex-col bg-white w-screen h-full`}>
+            <div className='w-[70%] lg:w-[50%] xl:w[40%] 2xl:w-[30%] p-6 bg-white shadow-xl m-auto gap-16 flex flex-col items-center rounded-xl'>
                 <p className='text-3xl font-bold text-center'>You don't have a Gold Pass? </p>
                 <span className='flex flex-col gap-2 w-[70%]'>
                     <button className='bg-green-500 py-2 rounded-md text-white font-semibold' >Buy Gold Pass</button>
@@ -52,4 +54,4 @@ const CompetitionDetail = () => {
   )
 }
 
-export default CompetitionDetail
+export default CompetitionDetail;

@@ -3,6 +3,7 @@ const SignInFunctions = () => {
         console.log(data)
     }
     const signup = (data, callback) => {
+        console.log(data)
         
     }
 

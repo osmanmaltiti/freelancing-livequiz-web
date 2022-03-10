@@ -19,7 +19,7 @@ const Homepage = () => {
             </div>
         </span>
 
-        <div className='flex flex-col bg-white py-4 w-full gap-3 lg:grid lg:grid-cols-2'>
+        <div className='flex flex-col bg-white py-4 w-full lg:mx-auto lg:px-[10%] gap-3 lg:grid lg:grid-cols-2'>
             <FeaturedQuizCard/>
             <FeaturedQuizCard/>
             <FeaturedQuizCard/>
@@ -43,7 +43,7 @@ const Homepage = () => {
                 <p>Week Results</p>
             </div>
 
-            <div className='flex mt-5  flex-col w-full bg-white lg:grid lg:grid-cols-2 lg:gap-2'>
+            <div className='flex mt-5  flex-col w-full bg-white lg:mx-auto lg:px-[10%] lg:grid lg:grid-cols-2 lg:gap-2'>
                 <ResultCard/>
                 <ResultCard/>
                 <ResultCard/>
