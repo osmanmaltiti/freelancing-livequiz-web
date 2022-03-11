@@ -1,0 +1,152 @@
+#main-featured-card{
+  &:first-child{
+    span{
+        background-color: #FE9901;
+        #f-card-button{
+          color: #FE9901;
+        }
+    }
+  }
+  &:nth-child(2){
+    span{
+        background-color: #BB7CB3;
+        #f-card-button{
+          color: #BB7CB3;
+        }
+    }
+  }
+  &:nth-child(3){
+    span{
+        background-color: #95C23D;
+        #f-card-button{
+          color: #95C23D;
+        }
+    }
+  }
+  &:nth-child(4){
+    span{
+        background-color: #EC6508;
+        #f-card-button{
+          color: #EC6508;
+        }
+    }
+  }
+  &:nth-child(5){
+    span{
+        background-color: #57C8F3;
+        #f-card-button{
+          color: #57C8F3;
+        }
+    }
+  }
+  &:last-child{
+    span{
+        background-color: #FF4A41;
+    }
+    #f-card-button{
+      color: #FF4A41 ;
+    }
+  }
+}
+#alt-featured-card{
+  &:first-child{
+    span{
+        background-color: #FE9901;
+      } 
+        .time{
+          color: #FE9901;
+        }
+  }
+  &:nth-child(2){
+    span{
+        background-color: #BB7CB3;
+      }
+        .time{
+          color: #BB7CB3;
+        }
+  }
+  &:nth-child(3){
+    span{
+        background-color: #95C23D;
+      }
+        .time{
+          color: #95C23D;
+        }
+  }
+  &:nth-child(4){
+    span{
+        background-color: #EC6508;
+      }
+        .time{
+          color: #EC6508;
+        }
+  }
+  &:nth-child(5){
+    span{
+        background-color: #57C8F3;
+      }
+        .time{
+          color: #57C8F3;
+        }
+  }
+  &:last-child{
+    span{
+        background-color: #FF4A41;
+    }
+    .time{
+      color: #FF4A41 ;
+    }
+  }
+}
+#main-results-card{
+  &:last-child{
+    border-bottom: none;
+  }
+}
+#alt-results-card{
+  &:first-child{
+    border-color: #FE9901;
+    span{
+      border-color: #FE9901;
+      }
+      p{
+        color:#FE9901;
+      }
+  }
+  &:nth-child(2){
+    border-color: #BB7CB3;
+    span{
+      border-color: #BB7CB3;
+      }
+      p{
+        color:#BB7CB3;
+      }
+  }
+  &:nth-child(3){
+    span{
+      border-color: #95C23D;
+      }
+    border-color: #95C23D;
+    p{
+      color:#95C23D;
+    }
+  }
+  &:nth-child(4){
+    span{
+        border-color: #EC6508;
+      }
+    border-color: #EC6508;
+    p{
+      color:#EC6508;
+    }    
+  }
+  &:last-child{
+    span{
+        border-color: #FF4A41;
+    }
+    border-color: #FF4A41;
+    p{
+      color:#FF4A41;
+    }
+  }
+}

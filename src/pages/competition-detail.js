@@ -6,29 +6,29 @@ const CompetitionDetail = () => {
   const [ open, setOpen ] = useState(false);
   const navigate = useNavigate();
   return (
-    <div className='relative w-full flex-grow flex flex-col gap-4 pb-4 items-center p-8 bg-[#ffffff87]'>
+    <div className='relative w-full flex-grow flex flex-col gap-4 pb-4 items-center p-8 bg-[#E8E8E8]'>
         <img src={image} className='w-[8rem] aspect-square'/>
-        <h2>UEFA EURO Cup Winner</h2>
+        <h2 className='text-2xl'>UEFA EURO Cup Winner</h2>
         <p className='lg:w-[70ch]'>Labore eiusmod dolore duis duis ullamco est. Occaecat minim elit in laborum dolor aliqua laboris labore ex commodo nulla. Nisi laboris quis quis do cupidatat aliquip veniam quis. Cillum esse est dolore officia consectetur proident ea et enim ea amet ullamco ad. Occaecat ut enim sint esse excepteur adipisicing. Deserunt magna ut do cupidatat deserunt veniam voluptate exercitation. Nostrud anim ipsum fugiat reprehenderit fugiat.</p>
         <div className='grid grid-cols-3 gap-4'>
             <span className='flex flex-col items-center'>
                 <p>Hours</p>
-                <p className='text-2xl font-semibold'>00</p>
+                <p className='text-2xl font-bold'>00</p>
             </span>
             <span className='flex flex-col items-center'>
                 <p>Minutes</p>
-                <p className='text-2xl font-semibold'>02</p>
+                <p className='text-2xl font-bold'>02</p>
             </span>
             <span className='flex flex-col items-center'>
                 <p>Seconds</p>
-                <p className='text-2xl font-semibold'>34</p>
+                <p className='text-2xl font-bold'>34</p>
             </span>
         </div>
         <span className='flex flex-col gap-1 items-center'>
-            <p>PRIZE POOL: $1000</p>
-            <p>ENTRY REQUIREMENTS: Gold Pass</p>
+            <p className='font-bold'>PRIZE POOL: $1000</p>
+            <p>Entry Requirement: <strong>Gold Pass</strong></p>
         </span>
-        <button className='bg-green-400 font-bold py-2 px-16 rounded-md text-white' onClick={() => setOpen(!open)}>JOIN</button>
+        <button className='bg-[#95C23D] font-bold py-2 px-16 rounded text-white' onClick={() => setOpen(!open)}>JOIN</button>
 
         {/* POPUPS */}
         <div style={{backgroundColor: '#00000069'}} className={`${open ? 'flex' : 'hidden'} absolute top-0 left-0 flex-col bg-white w-screen h-full`}>

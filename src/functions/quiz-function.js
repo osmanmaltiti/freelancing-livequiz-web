@@ -1,7 +1,7 @@
 const QuizFunctions = () => {
     const verifyAnswer = (answer, callback) => {
         if(answer !== ''){
-            if(answer === 'option 2'){
+            if(answer === 'Santiago'){
                 callback('correct')
             } else {
                 callback('wrong')

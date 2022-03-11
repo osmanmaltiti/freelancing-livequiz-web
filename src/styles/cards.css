@@ -1,0 +1,123 @@
+#main-featured-card:first-child span {
+  background-color: #FE9901;
+}
+#main-featured-card:first-child span #f-card-button {
+  color: #FE9901;
+}
+#main-featured-card:nth-child(2) span {
+  background-color: #BB7CB3;
+}
+#main-featured-card:nth-child(2) span #f-card-button {
+  color: #BB7CB3;
+}
+#main-featured-card:nth-child(3) span {
+  background-color: #95C23D;
+}
+#main-featured-card:nth-child(3) span #f-card-button {
+  color: #95C23D;
+}
+#main-featured-card:nth-child(4) span {
+  background-color: #EC6508;
+}
+#main-featured-card:nth-child(4) span #f-card-button {
+  color: #EC6508;
+}
+#main-featured-card:nth-child(5) span {
+  background-color: #57C8F3;
+}
+#main-featured-card:nth-child(5) span #f-card-button {
+  color: #57C8F3;
+}
+#main-featured-card:last-child span {
+  background-color: #FF4A41;
+}
+#main-featured-card:last-child #f-card-button {
+  color: #FF4A41;
+}
+
+#alt-featured-card:first-child span {
+  background-color: #FE9901;
+}
+#alt-featured-card:first-child .time {
+  color: #FE9901;
+}
+#alt-featured-card:nth-child(2) span {
+  background-color: #BB7CB3;
+}
+#alt-featured-card:nth-child(2) .time {
+  color: #BB7CB3;
+}
+#alt-featured-card:nth-child(3) span {
+  background-color: #95C23D;
+}
+#alt-featured-card:nth-child(3) .time {
+  color: #95C23D;
+}
+#alt-featured-card:nth-child(4) span {
+  background-color: #EC6508;
+}
+#alt-featured-card:nth-child(4) .time {
+  color: #EC6508;
+}
+#alt-featured-card:nth-child(5) span {
+  background-color: #57C8F3;
+}
+#alt-featured-card:nth-child(5) .time {
+  color: #57C8F3;
+}
+#alt-featured-card:last-child span {
+  background-color: #FF4A41;
+}
+#alt-featured-card:last-child .time {
+  color: #FF4A41;
+}
+
+#main-results-card:last-child {
+  border-bottom: none;
+}
+
+#alt-results-card:first-child {
+  border-color: #FE9901;
+}
+#alt-results-card:first-child span {
+  border-color: #FE9901;
+}
+#alt-results-card:first-child p {
+  color: #FE9901;
+}
+#alt-results-card:nth-child(2) {
+  border-color: #BB7CB3;
+}
+#alt-results-card:nth-child(2) span {
+  border-color: #BB7CB3;
+}
+#alt-results-card:nth-child(2) p {
+  color: #BB7CB3;
+}
+#alt-results-card:nth-child(3) {
+  border-color: #95C23D;
+}
+#alt-results-card:nth-child(3) span {
+  border-color: #95C23D;
+}
+#alt-results-card:nth-child(3) p {
+  color: #95C23D;
+}
+#alt-results-card:nth-child(4) {
+  border-color: #EC6508;
+}
+#alt-results-card:nth-child(4) span {
+  border-color: #EC6508;
+}
+#alt-results-card:nth-child(4) p {
+  color: #EC6508;
+}
+#alt-results-card:last-child {
+  border-color: #FF4A41;
+}
+#alt-results-card:last-child span {
+  border-color: #FF4A41;
+}
+#alt-results-card:last-child p {
+  color: #FF4A41;
+}/*# sourceMappingURL=cards.css.map */
