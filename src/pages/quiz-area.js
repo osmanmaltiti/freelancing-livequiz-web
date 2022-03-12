@@ -50,12 +50,12 @@ const QuizArea = () => {
         }
       });
   }
-  if(counter == 0) countdown();
+ if(counter == 0) countdown();
 
   return (
     <div id='main-quiz' className='flex-grow flex flex-col gap-4 py-4 w-full mx-auto'>
       <div className={`${round ? 'grid-cols-3 ': 'grid-cols-2'} grid lg:grid-cols-2 w-full lg:place-items-center`}>
-        <span className='flex flex-col text-white items-center'>
+        <span className='flex flex-col text-white lg:text-black items-center'>
           <p>Score</p>
           <h2 className='text-3xl font-bold '>15000</h2>
         </span>
@@ -64,7 +64,7 @@ const QuizArea = () => {
             <p className='text-2xl font-bold text-white'>00:{counter}</p>
           </div>
         </span>
-        <span className='flex flex-col items-center text-white lg:justify-self-center'>
+        <span className='flex flex-col items-center text-white lg:text-black lg:justify-self-center'>
           <p>Prize Money</p>
           <h2 className='text-3xl font-bold'>$1000</h2>
         </span>
@@ -72,7 +72,7 @@ const QuizArea = () => {
 
       {
         server.map((question, index) => 
-          <div key={question.id} className={`${round ? 'flex': 'hidden'} ${currentRound == index + 1 ? 'flex' : 'hidden'} relative w-[90%] lg:w-[50%] bg-white p-4 lg:pt-10 mb-8 gap-2 rounded-lg flex-col items-center mx-auto`}>
+          <div key={question.id} className={`${round ? 'flex': 'hidden'} ${currentRound == index + 1 ? 'flex' : 'hidden'} relative w-[90%] lg:w-[50%] bg-white p-4 lg:pt-10 mb-8 gap-2 rounded-2xl flex-col items-center mx-auto`}>
               <QuestionCard 
                     counter={counter} 
                     setAnswer={(e) => setAnswer(e.target.value)}

@@ -21,14 +21,14 @@ const Homepage = () => {
         
         <span>
         <div className='relative w-full py-4 z-10 bg-[#E8E8E8] m-auto flex flex-col items-center text-3xl font-bold'>
-                <hr className='absolute top-1/2 translate-y-1/2 w-[70%] h-[0.1rem] z-10 bg-[#707070]'/>
+                <hr className='absolute top-1/2 translate-y-1/2 w-[90%] h-[0.1rem] z-10 bg-[#707070]'/>
                 <span className='flex flex-col items-center bg-[#E8E8E8] text-[#36413E] z-10 px-6'>
                     <p>Today's</p>
                     <p>Featured Quiz</p>
                 </span>
             </div>
 
-        <div className='grid flex-col grid-cols-2 lg:grid-cols-3 bg-[#E8E8E8] py-4 px-2 w-full lg:mx-auto lg:px-[10%] gap-2 lg:grid'>
+        <div className='grid flex-col grid-cols-2 lg:grid-cols-3 bg-[#E8E8E8] pt-4 pb-16 px-2 w-full lg:mx-auto lg:px-[10%] gap-2 lg:grid'>
             {[1,2,3,4,5,6].map(item => <FeaturedQuizCardAlt key={item}/>)}
         </div>
         </span>
@@ -40,9 +40,9 @@ const Homepage = () => {
             <button className='bg-[#0361CC] p-3 px-12 text-white mt-2' onClick={() => navigate('/signin')}>SIGN UP</button>
         </div>
 
-        <span className='w-full relative py-2 flex flex-col bg-[#E8E8E8]'>
-            <div className='relative w-[50%] z-10 bg-[#E8E8E8] m-auto flex flex-col items-center text-3xl font-bold'>
-                <hr className='absolute top-1/2 translate-y-1/2 w-full h-[0.1rem] z-10 bg-[#707070]'/>
+        <span className='w-full relative pt-14 pb-32 flex flex-col bg-[#E8E8E8]'>
+            <div className='relative w-full z-10 bg-[#E8E8E8] m-auto flex flex-col items-center text-3xl font-bold'>
+                <hr className='absolute top-1/2 translate-y-1/2 w-[90%] h-[0.1rem] z-10 bg-[#707070]'/>
                 <span className='flex flex-col items-center bg-[#E8E8E8] text-[#36413E] z-10 px-6'>
                     <p className='text-center'>Last</p>
                     <p className='text-center'>Week Results</p>

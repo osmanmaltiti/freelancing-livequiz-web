@@ -7,7 +7,7 @@ const Footer = () => {
   return (
     <div className='w-full bg-[#262626] px-4 flex flex-row justify-between items-center p-2 py-4 text-white'>
         <p className='font-bold'>PRIVACY</p>
-        <div className='hidden lg:flex gap-2 flex-row text-sm'>
+        <div className='hidden lg:flex gap-8 flex-row text-sm'>
               <button className='my-1' onClick={() => navigate('/quiz')}>QUIZZES</button>
               <button className='my-1'>CATEGORY</button>
               <button className='my-1'>MULTIPLAYER</button>
