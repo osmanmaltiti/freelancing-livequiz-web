@@ -8,7 +8,7 @@ export const QuestionCard = (props) => {
   <>
       <span className='hidden lg:flex flex-col items-center lg:absolute -top-10'>
           <div className='grid place-items-center h-[5rem] aspect-square rounded-full bg-[#0084A4]'>
-            <p className='text-2xl font-bold text-white'>00:{props.counter}</p>
+            <p className='text-2xl font-bold text-white'>00:{props.counter > 9 ? props.counter : '0'+ props.counter}</p>
           </div>
         </span>
         <p className='text-2xl font-semibold text-[#0084A4]'>ROUND {props.round}</p>

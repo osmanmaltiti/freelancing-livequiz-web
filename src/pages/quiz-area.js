@@ -62,7 +62,7 @@ const QuizArea = () => {
         </span>
         <span className={`${round ? 'flex': 'hidden'} flex-col items-center lg:hidden top-24`}>
           <div className='grid place-items-center h-[5rem] aspect-square rounded-full bg-blue-500'>
-            <p className='text-2xl font-bold text-white'>00:{counter}</p>
+            <p className='text-2xl font-bold text-white'>00:{counter > 10 ? counter : '0'+ counter}</p>
           </div>
         </span>
         <span className='flex flex-col items-center text-white lg:text-black lg:justify-self-center'>
