@@ -19,6 +19,8 @@ const QuizArea = () => {
     setRound(!round)
     setAnswer('');
     return () => clearInterval(interval);
+
+    // eslint-disable-next-line
   })
 
   const countdown = () => {
