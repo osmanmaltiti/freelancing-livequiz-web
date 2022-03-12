@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
 import { useFormik } from 'formik';
 import Validate from '../components/validators';
 import SignInFunctions from '../functions/signin-function';
@@ -22,7 +21,6 @@ const SignIn = () => {
 export default SignIn;
 
 const Login = (props) => {
-    const navigate = useNavigate();
     const { validateLogin } = Validate();
     const { signin } = SignInFunctions();
   
@@ -93,7 +91,6 @@ const Login = (props) => {
 
 
 const SignUp = (props) => {
-    const navigate = useNavigate();
     const { validateSignup } = Validate();
     const { signup } = SignInFunctions();
   
