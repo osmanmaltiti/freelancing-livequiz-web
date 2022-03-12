@@ -19,7 +19,7 @@ const QuizArea = () => {
     setRound(!round)
     setAnswer('');
     return () => clearInterval(interval);
-  }, [round])
+  })
 
   const countdown = () => {
       verifyAnswer(answer, (option) => {
