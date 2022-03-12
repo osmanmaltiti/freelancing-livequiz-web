@@ -111,7 +111,7 @@ const SignUp = (props) => {
         className='w-full h-full mx-auto flex flex-col gap-y-3 gap-x-4 px-12 py-4 md:w-[90%]
           lg:grid lg:grid-cols-2 lg:items-center' 
         onSubmit={formik.handleSubmit}>
-        <h2 className='text-3xl font-semibold col-span-2'>Register</h2>
+        <h2 className='text-4xl col-span-2'>Register</h2>
         {/* FIRST NAME */}
           <label htmlFor="Firstname" className='w-full relative self-start m-0 flex flex-col gap-1'>
             <p className='text-lg '>First Name</p>
