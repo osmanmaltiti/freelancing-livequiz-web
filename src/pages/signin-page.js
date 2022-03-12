@@ -71,7 +71,7 @@ const Login = (props) => {
           <label htmlFor="extras" className='w-full self-start m-0 text-sm flex flex-row items-center col-span-2 justify-between'>
             <span className='flex flex-row items-center gap-1'>
               <input type='checkbox'/>
-              <p className='font-semibold'>Remember Me</p>
+              <p className='font-semibold text-[#36413E]'>Remember Me</p>
             </span>
             <span>
               <button className='text-[#5DA700]'>Forgotten password?</button>
