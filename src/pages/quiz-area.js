@@ -12,6 +12,7 @@ const QuizArea = () => {
   const [counter, setCounter] = useState(15)
   const [currentRound, setCurrentRound] = useState(1);
   const navigate = useNavigate();
+  const [next] = useState();
 
 
   useEffect(() => {
@@ -21,7 +22,7 @@ const QuizArea = () => {
     return () => clearInterval(interval);
 
     // eslint-disable-next-line
-  })
+  }, [next])
 
   const countdown = () => {
       verifyAnswer(answer, (option) => {

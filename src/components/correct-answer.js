@@ -66,7 +66,7 @@ export const WrongAnswer = () => {
         <img src={wrong} alt='' className='w-[4.5rem] aspect-square'/>
         <p className='text-4xl font-bold'>0 Points</p>
         <p className='text-2xl font-bold mt-4'>Next Question</p>
-        <p className='text-4xl font-bold'>00: 10</p>
+        <p className='text-4xl font-bold'>00:10</p>
       </div>
   )
 }
