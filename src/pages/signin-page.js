@@ -38,9 +38,9 @@ const Login = (props) => {
     return (
         <form className='w-full flex flex-col mx-auto justify-center px-12 gap-4 py-4 m-4 sm:w-4/5 md:w-[80%]' 
         onSubmit = {formik.handleSubmit}>
-          <h2 className='text-4xl '>Log in</h2>
+          <h2 className='text-4xl  font-semibold'>Log in</h2>
           <label htmlFor="FirstName" className='w-full relative self-start m-0'>
-            <p className=' text-lg'>Email</p>
+            <p className=' text-lg font-semibold'>Email</p>
             <input 
                 className='pl-2 w-full h-10 m-0 border-[#BCBCBC] border rounded-sm' 
                 id='email'
@@ -54,7 +54,7 @@ const Login = (props) => {
             { formik.errors.email ? <div className='absolute right-2 top-10 text-xl text-red-500 italic'>{formik.errors.email}</div>: null }
           </label>
           <label htmlFor="FirstName" className='w-full relative self-start m-0 text-lg'>
-            <p className=' text-lg'>Password</p>
+            <p className=' text-lg font-semibold'>Password</p>
             <input 
                 className='pl-2 w-full h-10 m-0 border-[#BCBCBC] border rounded-sm' 
                 id='password'
@@ -71,7 +71,7 @@ const Login = (props) => {
           <label htmlFor="extras" className='w-full self-start m-0 text-sm flex flex-row items-center col-span-2 justify-between'>
             <span className='flex flex-row items-center gap-1'>
               <input type='checkbox'/>
-              <p>Remember Me</p>
+              <p className='font-semibold'>Remember Me</p>
             </span>
             <span>
               <button className='text-[#5DA700]'>Forgotten password?</button>
@@ -111,10 +111,10 @@ const SignUp = (props) => {
         className='w-full h-full mx-auto flex flex-col gap-y-3 gap-x-4 px-12 py-4 md:w-[90%]
           lg:grid lg:grid-cols-2 lg:items-center' 
         onSubmit={formik.handleSubmit}>
-        <h2 className='text-4xl col-span-2'>Register</h2>
+        <h2 className='text-4xl col-span-2 font-semibold'>Register</h2>
         {/* FIRST NAME */}
           <label htmlFor="Firstname" className='w-full relative self-start m-0 flex flex-col gap-1'>
-            <p className='text-lg '>First Name</p>
+            <p className='text-lg font-semibold'>First Name</p>
             <input 
               className='pl-2 w-full h-10 m-0 border-[#BCBCBC] border rounded-sm'
               id='Firstname'
@@ -128,7 +128,7 @@ const SignUp = (props) => {
           </label>
         {/* LAST NAME */}
           <label htmlFor="Lastname" className='w-full relative self-start m-0 text-sm flex flex-col gap-1'>
-            <p className='text-lg '>Last Name</p>
+            <p className='text-lg font-semibold'>Last Name</p>
             <input 
               className='pl-2 w-full h-10 m-0 border-[#BCBCBC] border rounded-sm'
               id='Lastname'
@@ -142,7 +142,7 @@ const SignUp = (props) => {
           </label>
         {/* EMAIL */}
           <label htmlFor="Email" className='w-full relative self-start m-0 text-sm'>
-            <p className='text-lg '>Email</p>
+            <p className='text-lg font-semibold'>Email</p>
             <input 
               className='pl-2 w-full h-10 m-0 border-[#BCBCBC] border rounded-sm'
               id='Email'
@@ -156,7 +156,7 @@ const SignUp = (props) => {
           </label>
         {/* NUMBER */}
           <label htmlFor="Number" className='w-full relative self-start m-0 text-sm'>
-            <p className='text-lg '>Phone Number</p>
+            <p className='text-lg font-semibold'>Phone Number</p>
             <input 
                 className='pl-2 w-full h-10 m-0 border-[#BCBCBC] border rounded-sm'
                 id='Number'
@@ -170,7 +170,7 @@ const SignUp = (props) => {
           </label>
         {/* PASSWORD */}
           <label htmlFor="Password" className='w-full relative self-start m-0 text-sm'>
-            <p className='text-lg '>Password</p>
+            <p className='text-lg font-semibold'>Password</p>
             <input 
               className='pl-2 w-full h-10 m-0 border-[#BCBCBC] border rounded-sm'
               id='Password'
@@ -184,7 +184,7 @@ const SignUp = (props) => {
           </label>
         {/* CONFIRM PASSWORD */}
           <label htmlFor="Confirm" className='w-full relative self-start m-0 text-sm'>
-            <p className='text-lg '>Confirm Password</p>
+            <p className='text-lg font-semibold'>Confirm Password</p>
             <input 
               className='pl-2 w-full h-10 m-0 border-[#BCBCBC] border rounded-sm'
               id='Confirm'
