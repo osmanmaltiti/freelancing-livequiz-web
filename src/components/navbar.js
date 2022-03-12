@@ -24,7 +24,7 @@ export const DesktopNavbar = () => {
   const navigate = useNavigate();
      return (
       <div className='w-full flex flex-row justify-between items-center p-2 px-4 bg-white'>
-          <h1 className='text-3xl font-bold whitespace-nowrap'>Live Quiz</h1>
+          <h1 className='text-3xl font-bold whitespace-nowrap text-[#36413E]'>Live Quiz</h1>
           <div className='flex gap-8 flex-row text-sm'>
               <button className='my-1' onClick={() => navigate('/')}>HOME</button>
               <button className='my-1' onClick={() => navigate('/quiz')}>QUIZZES</button>
