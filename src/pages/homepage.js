@@ -1,6 +1,5 @@
 import React from 'react';
-import { FeaturedQuizCardAlt, ResultCard, ResultCardAlt } from '../components/landing-page-cards';
-import {FeaturedQuizCard} from '../components/landing-page-cards';
+import { FeaturedQuizCardAlt, ResultCardAlt } from '../components/landing-page-cards';
 import banner from '../Assets/Banner Image.png';
 import { useNavigate } from 'react-router-dom';
 
@@ -9,7 +8,7 @@ const Homepage = () => {
   return (
     <div className='w-full flex-grow flex flex-col bg-[#959595]'>
         <span className='relative'>
-            <img src={banner} className='w-full object-cover bg-white aspect-video lg:h-[20rem]'/>
+            <img alt='' src={banner} className='w-full object-cover bg-white aspect-video lg:h-[20rem]'/>
             <div className='absolute bg-white p-2 w-[80%] lg:w-[70%] xl:w-[60%] 2xl:w-[50%] h-[50%] top-[50%] left-[50%] -translate-x-1/2 -translate-y-1/2'>
                 <div className='w-full gap-2 flex flex-col items-center justify-center h-full border border-[#36413E]'>
                     <p className='text-3xl italic font-medium text-[#19381F]'>Soccer Sport Quizzes</p>

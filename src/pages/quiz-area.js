@@ -10,10 +10,8 @@ const QuizArea = () => {
   const [results, setResults] = useState('');
   const { verifyAnswer } = QuizFunctions();
   const [counter, setCounter] = useState(15)
-  const [reset, setReset] = useState();
   const [currentRound, setCurrentRound] = useState(1);
   const navigate = useNavigate();
-  const [next, setNext] = useState(0)
 
 
   useEffect(() => {
@@ -21,7 +19,7 @@ const QuizArea = () => {
     setRound(!round)
     setAnswer('');
     return () => clearInterval(interval);
-  },[next])
+  }, [round])
 
   const countdown = () => {
       verifyAnswer(answer, (option) => {
@@ -50,7 +48,7 @@ const QuizArea = () => {
         }
       });
   }
- if(counter == 0) countdown();
+ if(counter === 0) countdown();
 
   return (
     <div id='main-quiz' className='flex-grow flex flex-col gap-4 py-4 w-full mx-auto'>
@@ -72,7 +70,7 @@ const QuizArea = () => {
 
       {
         server.map((question, index) => 
-          <div key={question.id} className={`${round ? 'flex': 'hidden'} ${currentRound == index + 1 ? 'flex' : 'hidden'} relative w-[90%] lg:w-[50%] bg-white p-4 lg:pt-10 mb-8 gap-2 rounded-2xl flex-col items-center mx-auto`}>
+          <div key={question.id} className={`${round ? 'flex': 'hidden'} ${currentRound === index + 1 ? 'flex' : 'hidden'} relative w-[90%] lg:w-[50%] bg-white p-4 lg:pt-10 mb-8 gap-2 rounded-2xl flex-col items-center mx-auto`}>
               <QuestionCard 
                     counter={counter} 
                     setAnswer={(e) => setAnswer(e.target.value)}

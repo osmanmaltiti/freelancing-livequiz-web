@@ -45,7 +45,7 @@ export const CorrectAnswer = () => {
         </span>
         <p className='text-3xl text-[#0084A4]'>ROUND 1</p>
         <p className='text-xl'>Your Answer is Correct</p>
-        <img src={correct} className='w-[7rem] aspect-square'/>
+        <img src={correct} alt='' className='w-[7rem] aspect-square'/>
         <p className='text-2xl font-medium'>12x500=6000</p>
         <p className='text-xl font-bold mt-4'>Next Question</p>
         <p className='text-4xl font-bold'>00:10</p>
@@ -63,7 +63,7 @@ export const WrongAnswer = () => {
         </span>
         <p className='text-3xl text-[#0084A4]'>ROUND 1</p>
         <p className='text-xl'>Your Answer is Wrong</p>
-        <img src={wrong} className='w-[4.5rem] aspect-square'/>
+        <img src={wrong} alt='' className='w-[4.5rem] aspect-square'/>
         <p className='text-4xl font-bold'>0 Points</p>
         <p className='text-2xl font-bold mt-4'>Next Question</p>
         <p className='text-4xl font-bold'>00: 10</p>
@@ -82,7 +82,7 @@ export const MiniLeaderboard = () => {
           [1,2,3,4].map(item => <div key={item} className='w-[90%] grid py-2 grid-cols-2 border-b border-b-gray-400 border-t border-t-gray-400 font-bold'>
             <span className='flex flex-row gap-2 items-center'>
               <p className='font-medium'>{item}</p>
-              <img className='w-[2.5rem] h-[2.5rem] rounded-full' src={avatar}/>
+              <img alt='' className='w-[2.5rem] h-[2.5rem] rounded-full' src={avatar}/>
               <p>Ahsan</p>
             </span>
             <p className='justify-self-end'>119,600</p>
