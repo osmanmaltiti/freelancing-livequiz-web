@@ -1,16 +1,19 @@
 import React, { useState } from 'react';
 import image from '../Assets/R (1).png';
 import { useNavigate } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 
 const CompetitionDetail = () => {
   const [ open, setOpen ] = useState(false);
   const [ openPass, setOpenPass ] = useState(false);
   const navigate = useNavigate();
+  const comp = useSelector(state => state.competition.currentCompetition);
+  console.log(comp)
   return (
     <div className='relative w-full flex-grow flex flex-col gap-4 pb-4 items-center p-8 bg-[#E8E8E8]'>
-        <img alt='' src={image} className='w-[8rem] aspect-square'/>
-        <h2 className='text-2xl'>UEFA EURO Cup Winner</h2>
-        <p className='lg:w-[70ch] font-medium '>Labore eiusmod dolore duis duis ullamco est. Occaecat minim elit in laborum dolor aliqua laboris labore ex commodo nulla. Nisi laboris quis quis do cupidatat aliquip veniam quis. Cillum esse est dolore officia consectetur proident ea et enim ea amet ullamco ad. Occaecat ut enim sint esse excepteur adipisicing. Deserunt magna ut do cupidatat deserunt veniam voluptate exercitation. Nostrud anim ipsum fugiat reprehenderit fugiat.</p>
+        <img alt='' src={comp.img} className='w-[8rem] rounded-xl aspect-square object-cover'/>
+        <h2 className='text-2xl'>{comp.title}</h2>
+        <p className='lg:w-[70ch] font-medium text-center'>{comp.detail_des}</p>
         <div className='flex flex-row gap-2 font-medium text-lg'>
             <span className='flex flex-col items-center '>
                 <p>Hours</p>

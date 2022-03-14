@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import { useFormik } from 'formik';
 import Validate from '../components/validators';
-import SignInFunctions from '../functions/signin-function';
 import '../styles/App.css';
+import Sign from '../API/POST-sign';
 
 const SignIn = () => {
     const [ toggle, setToggle ] = useState(false);
@@ -22,7 +22,7 @@ export default SignIn;
 
 const Login = (props) => {
     const { validateLogin } = Validate();
-    const { signin } = SignInFunctions();
+    const { login } = Sign();
   
     const formik = useFormik({
       initialValues: {
@@ -31,11 +31,12 @@ const Login = (props) => {
       },
       validate: validateLogin,
       onSubmit: (values) => {
-        signin(values);
+        login(values);
       }
     });
   
     return (
+      <>
         <form className='w-full flex flex-col mx-auto justify-center px-12 gap-4 py-4 m-4 sm:w-4/5 md:w-[80%]' 
         onSubmit = {formik.handleSubmit}>
           <h2 className='text-4xl text-[#36413E] font-semibold'>Log in</h2>
@@ -83,16 +84,18 @@ const Login = (props) => {
           border-2 border-solid border-[#5DA700]
           hover:border-2 hover:border-solid col-span-2'
           type='submit'>Log In</button>
+        </form>
+  
           <button className='toggle-button m-auto mb-2 gap-1 flex flex-row ' 
             onClick={props.toggle}>Don't have an account? <p className='text-[#5DA700]'>Sign Up</p></button>
-        </form>
+      </>
     )
 };
 
 
 const SignUp = (props) => {
     const { validateSignup } = Validate();
-    const { signup } = SignInFunctions();
+    const { signup } = Sign();
   
     const formik = useFormik({
       initialValues: {
@@ -107,6 +110,7 @@ const SignUp = (props) => {
     });
   
     return (
+      <>
         <form 
         className='w-full h-full mx-auto flex flex-col gap-y-3 gap-x-4 px-12 py-4 md:w-[90%]
           lg:grid lg:grid-cols-2 lg:items-center' 
@@ -204,9 +208,10 @@ const SignUp = (props) => {
           hover:border-2 hover:border-solid col-span-2'
           type='submit'>Register</button>
 
+        </form>
           <button className='toggle-button col-span-2 w-fit mx-auto mb-2 gap-1 flex flex-row' 
             onClick={props.toggle}>Already registered?  
             <p className='text-[#5DA700]'>Sign In here </p></button>
-        </form>
+      </>
     )
   };

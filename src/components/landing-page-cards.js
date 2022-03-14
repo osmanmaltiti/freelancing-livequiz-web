@@ -51,14 +51,14 @@ export const ResultCard = () => {
   )
 }
 
-export const FeaturedQuizCardAlt = () => {
+export const FeaturedQuizCardAlt = (props) => {
   const navigate = useNavigate();
   return (
     <div id='alt-featured-card' className='flex flex-col text-white items-center rounded-xl overflow-hidden'>
         <span className='h-full w-full grid place-items-center ml-auto pt-4'>
-          <img alt='' src={ image } className='w-[7rem] aspect-square'/>
-          <p className='text-sm text-center md:text-lg lg:text-xl text-black font-bold'>UEFA EURO Cup Winner</p>
-          <p className='text-base md:text-xl text-center lg:text-2xl font-bold'>PRIZE POOL: $1,000</p>
+          <img alt='' src={ props.image } className='w-[7rem] aspect-square object-cover rounded-xl'/>
+          <p className='text-sm text-center md:text-lg lg:text-xl text-black font-bold'>{props.title}</p>
+          <p className='text-base md:text-xl text-center lg:text-2xl font-bold'>PRIZE POOL: ${props.price}</p>
         </span>
         <div className='h-full flex flex-col gap-1 p-2 w-full bg-black items-center'>
           <p className='font-medium text-sm md:text-base text-center md:font-semibold'>MARCH 03, 2022 - 6:00 PM</p>
@@ -77,7 +77,7 @@ export const FeaturedQuizCardAlt = () => {
             </div>
           </div>
           <span className='w-[95%] rounded-full'>
-            <button className='text-white rounded-md font-medium py-1 w-full' onClick={() => navigate('/competitiondetail')}>VIEW DETAILS</button>
+            <button className='text-white rounded-md font-medium py-1 w-full' onClick={props.navigate}>VIEW DETAILS</button>
           </span>
         </div>
     </div>
