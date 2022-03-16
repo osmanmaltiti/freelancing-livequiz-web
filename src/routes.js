@@ -1,7 +1,7 @@
 import React from 'react';
 import { Routes, Route } from 'react-router-dom'; 
 import Layout from './components/layout';
-import Winner from './components/winner';
+import Winner from './pages/results';
 import CompetitionDetail from './pages/competition-detail';
 import Homepage from './pages/homepage';
 import QuizArea from './pages/quiz-area';

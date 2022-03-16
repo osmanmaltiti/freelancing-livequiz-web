@@ -4,23 +4,25 @@ const Sign = () => {
   const login = async(data, callback) => {
     const { email, password } = data;
     const login_data = {
-      email,
+      username: email,
       password
     }
-    const response = await axios.post('http://localhost:5000/api/v1/users/signup', { input: login_data });
+    const response = await axios.post('http://35.243.146.103:3001/login', 
+    {}, { params: {...login_data} });
     console.log(response.data)
   }
   const signup = async(data, callback) => {
-    const {Firstname, Lastname, Email, Number, Password, Confirm} = data;
+    const {Firstname, Lastname, Email, Number, Password} = data;
     const signup_data = {
       first_name: Firstname,
       last_name: Lastname,
       email: Email,
       phone_number: Number,
       password: Password,
-      confirm_password: Confirm
     }
-    const response = await axios.post('http://localhost:5000/api/v1/users/signup', { input: signup_data });
+    console.log(signup_data)
+    const response = await axios.post('http://35.243.146.103:3001/registration',
+    {}, { params: { ...signup_data } });
     console.log(response.data)
   }
   return { login, signup }

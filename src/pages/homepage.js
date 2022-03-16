@@ -5,14 +5,17 @@ import { useNavigate } from 'react-router-dom';
 import Competition from '../API/GET-competition';
 import { useDispatch, useSelector } from 'react-redux';
 import { setCompetition } from '../redux/competition-slice';
+
 const Homepage = () => {
     const navigate = useNavigate();
     const dispatch = useDispatch();
     const { getCompetitions } = Competition();
     const comps = useSelector(state => state.competition.allCompetition);
+    
     useEffect(() => {
-        getCompetitions()
-    }, [])
+        getCompetitions();
+    }, []);
+
   return (
     <div className='w-full flex-grow flex flex-col bg-[#959595]'>
         <span className='relative'>
