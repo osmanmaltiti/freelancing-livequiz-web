@@ -12,17 +12,17 @@ const Sign = () => {
     console.log(response.data)
   }
   const signup = async(data, callback) => {
-    const {Firstname, Lastname, Email, Number, Password} = data;
+    const {Firstname, Lastname, Email, Number, Password, Confirm} = data;
     const signup_data = {
       first_name: Firstname,
       last_name: Lastname,
       email: Email,
       phone_number: Number,
       password: Password,
+      confirm_password: Confirm
     }
-    console.log(signup_data)
     const response = await axios.post('http://35.243.146.103:3001/registration',
-    {}, { params: { ...signup_data } });
+    { params: { ...signup_data } });
     console.log(response.data)
   }
   return { login, signup }

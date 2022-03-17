@@ -1,20 +1,36 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import Pass from '../API/POST-pass';
+import Competition from '../API/GET-competition';
 
 const CompetitionDetail = () => {
   const [ open, setOpen ] = useState(false);
   const [ openPass, setOpenPass ] = useState(false);
   const { buyPass, usesPass } = Pass();
   const navigate = useNavigate();
+  const { checkCompetition } = Competition();
   const comp = useSelector(state => state.competition.currentCompetition);
 
-  const UsePass = async() => {
+  useEffect(() => {
+      if(comp.length == 0) navigate('/');
+  }, []);
+
+  const CheckCompetition = () => {
+    checkCompetition((status) => {
+        if(status === "100"){
+            setOpen(!open);
+        } else {
+            setOpenPass(!openPass);
+        }
+    })
+  }
+
+  const UsePass = () => {
     usesPass((status) => {
         if(status === "100"){ 
-            navigate('/quiz');
             setOpen(!open);
+            navigate('/quiz');
         } else {
             setOpenPass(!openPass);
             setOpen(!open);
@@ -22,9 +38,12 @@ const CompetitionDetail = () => {
     })
   }
 
-  const BuyPass = async() => {
+  const BuyPass = () => {
     buyPass((status) => {
-        if(status === "100") navigate('/quiz');
+        if(status === "100") {
+            setOpenPass(!openPass);
+            setOpen(!open)
+        }
         else {
             alert('Purchase failed');
             setOpenPass(!openPass)
@@ -58,9 +77,9 @@ const CompetitionDetail = () => {
             <p className='font-bold'>PRIZE POOL: $1000</p>
             <p className='font-medium'>Entry Requirement: <strong>Gold Pass</strong></p>
         </span>
-        <button className='bg-[#95C23D] font-bold py-2 px-16 rounded text-white' onClick={() => setOpen(!open)}>JOIN</button>
+        <button className='bg-[#95C23D] font-bold py-2 px-16 rounded text-white' onClick={() => CheckCompetition()}>JOIN</button>
 
-        {/* POPUPS */}
+        {/* POPUPS - USE GOLD PASS */}
         <div style={{backgroundColor: '#00000069'}} className={`${open ? 'flex' : 'hidden'} absolute top-0 left-0 flex-col bg-white w-screen h-full`}>
             <div className='w-[70%] lg:w-[50%] xl:w[40%] 2xl:w-[30%] p-6 bg-white shadow-xl m-auto gap-16 flex flex-col items-center rounded-xl'>
                 <p className='text-3xl font-bold text-center'>Are you sure you want to use a Gold Pass? </p>
