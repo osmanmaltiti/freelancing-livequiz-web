@@ -9,7 +9,9 @@ const Winner = () => {
   const leaderboard = useSelector(state => state.results.leaderboard)
 
   useEffect(() => {
-    getLeaderboards()
+    getLeaderboards();
+    
+    //eslint-disable-next-line
   },[]);
 
   return (

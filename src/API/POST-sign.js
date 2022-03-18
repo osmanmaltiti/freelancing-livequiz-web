@@ -8,9 +8,14 @@ const Sign = () => {
       password
     }
     const response = await axios.post('http://35.243.146.103:3001/login', 
-    {}, { params: {...login_data} });
+    { ...login_data });
+
+    localStorage.setItem("token", JSON.stringify(response.data.token));
+    localStorage.setItem("token", JSON.stringify(response.data.data));
+    callback();
     console.log(response.data)
   }
+
   const signup = async(data, callback) => {
     const {Firstname, Lastname, Email, Number, Password, Confirm} = data;
     const signup_data = {
@@ -22,7 +27,11 @@ const Sign = () => {
       confirm_password: Confirm
     }
     const response = await axios.post('http://35.243.146.103:3001/registration',
-    { params: { ...signup_data } });
+    { ...signup_data });
+
+    localStorage.setItem("token", JSON.stringify(response.data.token));
+    localStorage.setItem("token", JSON.stringify(response.data.data));
+    callback();
     console.log(response.data)
   }
   return { login, signup }

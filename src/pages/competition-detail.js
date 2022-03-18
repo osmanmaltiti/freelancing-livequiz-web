@@ -13,7 +13,9 @@ const CompetitionDetail = () => {
   const comp = useSelector(state => state.competition.currentCompetition);
 
   useEffect(() => {
-      if(comp.length == 0) navigate('/');
+      if(comp.length === 0) navigate('/');
+
+      //eslint-disable-next-line
   }, []);
 
   const CheckCompetition = () => {
