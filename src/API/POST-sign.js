@@ -11,9 +11,10 @@ const Sign = () => {
     { ...login_data });
 
     localStorage.setItem("token", JSON.stringify(response.data.token));
-    localStorage.setItem("token", JSON.stringify(response.data.data));
+    const user = { ...response.data };
+    delete user.token;
+    localStorage.setItem("currentUser", JSON.stringify(user));
     callback();
-    console.log(response.data)
   }
 
   const signup = async(data, callback) => {
@@ -30,9 +31,8 @@ const Sign = () => {
     { ...signup_data });
 
     localStorage.setItem("token", JSON.stringify(response.data.token));
-    localStorage.setItem("token", JSON.stringify(response.data.data));
+    localStorage.setItem("currentUser", JSON.stringify(response.data.data));
     callback();
-    console.log(response.data)
   }
   return { login, signup }
 }

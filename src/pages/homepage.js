@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { FeaturedQuizCardAlt, ResultCardAlt } from '../components/landing-page-cards';
 import banner from '../Assets/Banner Image.png';
 import { useNavigate } from 'react-router-dom';
@@ -10,10 +10,14 @@ const Homepage = () => {
     const navigate = useNavigate();
     const dispatch = useDispatch();
     const { getCompetitions } = Competition();
+    const [ user, setUser ] = useState();
     const comps = useSelector(state => state.competition.allCompetition);
     
     useEffect(() => {
         getCompetitions();
+        let currentUser = localStorage.getItem("currentUser");
+        setUser(currentUser);
+        //eslint-disable-next-line
     }, []);
 
   return (
@@ -58,7 +62,7 @@ const Homepage = () => {
             <p className='text-3xl'>Exciting Prizes</p>
             <p className='text-2xl mt-2'>Sign Up to Compete</p>
             <p className='text-2xl'>with the World</p>
-            <button className='bg-[#0361CC] p-3 px-12 text-white mt-2' onClick={() => navigate('/signin')}>SIGN UP</button>
+            <button className={`${user ? 'hidden' : 'flex'} bg-[#0361CC] p-3 px-12 text-white mt-2`} onClick={() => navigate('/signin')}>SIGN UP</button>
         </div>
 
         <span className='w-full relative pt-14 pb-32 flex flex-col bg-[#E8E8E8]'>
