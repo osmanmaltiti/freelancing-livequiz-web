@@ -6,7 +6,7 @@ import useMedia from '../hooks/useMedia';
 const Layout = ({ children }) => {
   const lg = useMedia('(min-width: 1024px)');
   return (
-    <div className='flex flex-col w-screen h-screen overflow-x-hidden scrollbar-thin lg:scrollbar-thumb-black'>
+    <div className='flex flex-col w-screen h-screen overflow-x-hidden lg:scrollbar-thin lg:scrollbar-thumb-black'>
         {lg ? <DesktopNavbar/> : <MobileNavbar/>}
             {children}
         <Footer/>

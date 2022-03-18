@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import wrong from '../Assets/cancel.png';
 import correct from '../Assets/check-mark.png';
 import avatar from '../Assets/avatar.png';
@@ -29,7 +29,7 @@ export const QuestionCard = (props) => {
                 </label>)
           }
           {/* POPUP */}
-          <p className='text-xl col-span-2 mx-auto text-[#0084A4]'>Wait for the other participants to answer</p>
+          <p className={`${props.pop ? 'flex' : 'hidden'} text-xl col-span-2 mx-auto text-center text-[#0084A4]`}>Wait for the other participants to answer</p>
         </span>
   </>
   )

@@ -5,64 +5,53 @@ import { server } from '../fake-server/server';
 import { useNavigate } from 'react-router-dom';
 
 const QuizArea = () => {
-  const [answer, setAnswer] = useState('');
-  const [round, setRound] = useState(false);
-  const [results, setResults] = useState('');
   const { verifyAnswer } = QuizFunctions();
-  const [counter, setCounter] = useState(15)
-  const [currentRound, setCurrentRound] = useState(1);
   const navigate = useNavigate();
-  const [next] = useState();
-
+  const [answer, setAnswer] = useState('');
+  const [quizCard, setQuizCard] = useState(false);
+  const [results, setResults] = useState('');
+  const [counter, setCounter] = useState(15)
+  const [round, setRound] = useState(1);
+  const [next, setNext] = useState(false);
+  const [popup, setPopup] = useState(true);
 
   useEffect(() => {
-    const interval = setInterval(() => setCounter(prev => prev > 1 ? prev - 1: 0), 1000);
-    setRound(!round)
+    setQuizCard(!quizCard);
     setAnswer('');
+    setPopup(!popup)
+    const interval = setInterval(() => { setCounter(prev => prev >= 0 ? prev - 1: 0) }, 1000); 
+    if(round > server.length){
+      navigate('/results')
+    }
     return () => clearInterval(interval);
-
-    // eslint-disable-next-line
   }, [next])
 
-  const countdown = () => {
-      verifyAnswer(answer, (option) => {
-        if(option === 'correct'){
-          setRound(!round)
-          setAnswer('');
-          setResults(option);
-          setCounter(15);
+  const timer = () => {
+    verifyAnswer(answer, (option) => {
+        setQuizCard(!quizCard);
+        setRound(prev => prev + 1)
+        setResults(option);
+        setCounter(20)
 
-          if(currentRound <= server.length){
-            setCurrentRound(prev => prev + 1);
-          } else {
-            navigate('/results')
-          }
-        } else {
-          setRound(!round);
-          setAnswer('');
-          setResults(option);
-          setCounter(15);
-
-          if(currentRound <= server.length){
-            setCurrentRound(prev => prev + 1);
-          } else {
-            navigate('/results')
-          }
-        }
-      });
+        setTimeout(() => {
+          setNext(!next);
+        }, 5000)
+      }
+    )
   }
- if(counter === 0) countdown();
+  if( counter === 0 ) timer();
 
+  
   return (
     <div id='main-quiz' className='flex-grow flex flex-col gap-4 py-4 w-full mx-auto'>
-      <div className={`${round ? 'grid-cols-3 ': 'grid-cols-2'} grid lg:grid-cols-2 w-full lg:place-items-center`}>
+      <div className={`${quizCard ? 'grid-cols-3 ': 'grid-cols-2'} grid lg:grid-cols-2 w-full lg:place-items-center`}>
         <span className='flex flex-col text-white lg:text-black items-center'>
           <p>Score</p>
           <h2 className='text-3xl font-bold '>15000</h2>
         </span>
-        <span className={`${round ? 'flex': 'hidden'} flex-col items-center lg:hidden top-24`}>
+        <span className={`${quizCard ? 'flex': 'hidden'} flex-col items-center lg:hidden top-24`}>
           <div className='grid place-items-center h-[5rem] aspect-square rounded-full bg-blue-500'>
-            <p className='text-2xl font-bold text-white'>00:{counter > 10 ? counter : '0'+ counter}</p>
+            <p className='text-2xl font-bold text-white'>00:{counter > 9 ? counter : '0'+ counter}</p>
           </div>
         </span>
         <span className='flex flex-col items-center text-white lg:text-black lg:justify-self-center'>
@@ -73,24 +62,28 @@ const QuizArea = () => {
 
       {
         server.map((question, index) => 
-          <div key={question.id} className={`${round ? 'flex': 'hidden'} ${currentRound === index + 1 ? 'flex' : 'hidden'} relative w-[90%] lg:w-[50%] bg-white p-4 lg:pt-10 mb-8 gap-2 rounded-2xl flex-col items-center mx-auto`}>
+          <div key={question.id} className={`${quizCard ? 'flex': 'hidden'} ${round === index + 1 ? 'flex' : 'hidden'} relative w-[90%] lg:w-[50%] bg-white p-4 lg:pt-10 mb-8 gap-2 rounded-2xl flex-col items-center mx-auto`}>
               <QuestionCard 
                     counter={counter} 
-                    setAnswer={(e) => setAnswer(e.target.value)}
+                    setAnswer={(e) => {
+                      setAnswer(e.target.value)
+                      setPopup(!popup)
+                    }}
                     quiz={question.question}
                     options={question.options}
-                    round={index + 1}/>
+                    round={index + 1}
+                    pop = {popup}/>
           </div>)
       }
       {/* RESULTS */}
       {
         results === 'correct' ? 
-          <span className={`${round ? 'hidden': 'flex flex-col' }`}>
+          <span className={`${quizCard ? 'hidden': 'flex flex-col' }`}>
             <CorrectAnswer/>
             <MiniLeaderboard/>
           </span>  : 
         results === 'wrong' ? 
-          <span className={`${round ? 'hidden': 'flex flex-col' }`}>  
+          <span className={`${quizCard ? 'hidden': 'flex flex-col' }`}>  
             <WrongAnswer/>
             <MiniLeaderboard/> 
           </span>

@@ -1,13 +1,16 @@
 import React, { useState } from 'react';
 import { useFormik } from 'formik';
 import Validate from '../components/validators';
-import SignInFunctions from '../functions/signin-function';
 import '../styles/App.css';
+import Sign from '../API/POST-sign';
+import { FadeLoader } from 'react-spinners';
+import { css } from '@emotion/react';
+import { useNavigate } from 'react-router-dom';
 
 const SignIn = () => {
     const [ toggle, setToggle ] = useState(false);
+    const [ loading, setLoading ] = useState(false);
 
-  
     return (
       <div id='main-signin' className='w-screen h-screen flex flex-col bg-blue-50 md:bg-lightblue overflow-y-auto scrollbar-thin'>
           <div style={{backgroundColor: '#ffffffab'}} className= 'flex flex-col flex-grow w-full py-6 m-auto items-center gap-8 lg:w-[70%] xl:w-[50%] lg:flex-grow-0'>
@@ -22,8 +25,18 @@ export default SignIn;
 
 const Login = (props) => {
     const { validateLogin } = Validate();
-    const { signin } = SignInFunctions();
-  
+    const { login } = Sign();
+    const [ loading, setLoading ] = useState(false);
+    const navigate = useNavigate();
+    const override = css`
+      display: block;
+      margin: 0 auto;
+    `;
+    
+    const disable = {
+      disabled: loading ? true : false
+    }
+
     const formik = useFormik({
       initialValues: {
         email: '',
@@ -31,11 +44,15 @@ const Login = (props) => {
       },
       validate: validateLogin,
       onSubmit: (values) => {
-        signin(values);
+        setLoading(!loading)
+        login(values, () => {
+          navigate('/');
+        });
       }
     });
   
     return (
+      <>
         <form className='w-full flex flex-col mx-auto justify-center px-12 gap-4 py-4 m-4 sm:w-4/5 md:w-[80%]' 
         onSubmit = {formik.handleSubmit}>
           <h2 className='text-4xl text-[#36413E] font-semibold'>Log in</h2>
@@ -51,7 +68,7 @@ const Login = (props) => {
                 onChange={formik.handleChange}
                 onBlur={formik.handleBlur}
             />
-            { formik.errors.email ? <div className='absolute right-2 top-10 text-xl text-red-500 italic'>{formik.errors.email}</div>: null }
+            { formik.errors.email ? <div className='absolute right-2 top-10 text-sm text-red-500 italic'>{formik.errors.email}</div>: null }
           </label>
           <label htmlFor="FirstName" className='w-full relative self-start m-0 text-lg'>
             <p className=' text-lg font-semibold text-[#36413E]'>Password</p>
@@ -79,21 +96,38 @@ const Login = (props) => {
             { formik.errors.Confirm ? <div className='text-xl text-red-500 italic'>{ formik.errors.Confirm }</div> : null }
           </label>
           {/* SUBMIT BUTTON */}
-          <button className='bg-[#5DA700] text-white py-2 px-8 mt-4   w-full 
-          border-2 border-solid border-[#5DA700]
+          <button className='bg-[#5DA700] text-white py-2 px-8 mt-4 h-[3rem]  w-full 
+          border-2 border-solid border-[#5DA700] disabled:cursor-not-allowed
           hover:border-2 hover:border-solid col-span-2'
-          type='submit'>Log In</button>
-          <button className='toggle-button m-auto mb-2 gap-1 flex flex-row ' 
-            onClick={props.toggle}>Don't have an account? <p className='text-[#5DA700]'>Sign Up</p></button>
+          type='submit' {...disable}> 
+            {loading === true ? <FadeLoader color='white' css={override} height={8} width={2} margin={-4}/> : <p>Log In</p>}
+          </button>
         </form>
+  
+          <button className='toggle-button m-auto mb-2 gap-1 flex flex-row ' 
+            onClick={props.toggle}>
+              Don't have an account? <p className='text-[#5DA700]'>Sign Up</p>
+          </button>
+      </>
     )
 };
 
 
 const SignUp = (props) => {
     const { validateSignup } = Validate();
-    const { signup } = SignInFunctions();
-  
+    const { signup } = Sign();
+    const [ loading, setLoading ] = useState(false)
+    const navigate = useNavigate();
+    
+    const override = css`
+      display: block;
+      margin: 0 auto;
+    `;  
+    
+    const disable = {
+      disabled: loading ? true : false
+    }
+
     const formik = useFormik({
       initialValues: {
         Firstname: '', Lastname: '', 
@@ -102,15 +136,19 @@ const SignUp = (props) => {
       },
       validate: validateSignup,
       onSubmit: (values) => {
-        signup(values)
+        setLoading(!loading)
+        signup(values, () => {
+          navigate('/');
+        })
       }
     });
   
     return (
+      <>
         <form 
         className='w-full h-full mx-auto flex flex-col gap-y-3 gap-x-4 px-12 py-4 md:w-[90%]
           lg:grid lg:grid-cols-2 lg:items-center' 
-        onSubmit={formik.handleSubmit}>
+        onSubmit={formik.handleSubmit} >
         <h2 className='text-4xl col-span-2 font-semibold text-[#36413E]'>Register</h2>
         {/* FIRST NAME */}
           <label htmlFor="Firstname" className='w-full relative self-start m-0 flex flex-col gap-1'>
@@ -152,7 +190,7 @@ const SignUp = (props) => {
               type='email'
               placeholder='Enter your email'
             />
-            { formik.errors.Email ? <div className='text-xl absolute right-2 top-10 text-red-500 italic'>{ formik.errors.Email }</div> : null }
+            { formik.errors.Email ? <div className='text-sm absolute right-2 top-10 text-red-500 italic'>{ formik.errors.Email }</div> : null }
           </label>
         {/* NUMBER */}
           <label htmlFor="Number" className='w-full relative self-start m-0 text-sm'>
@@ -199,14 +237,17 @@ const SignUp = (props) => {
           
         {/* SUBMIT BUTTON */}
           <button className='bg-[#5DA700] text-white py-2 px-8 mt-8 w-[70%]
-          mx-auto 
+          mx-auto h-[3rem] disabled:cursor-not-allowed
           border-2 border-solid border-[#5DA700]
           hover:border-2 hover:border-solid col-span-2'
-          type='submit'>Register</button>
+          type='submit' {...disable}>
+            {loading === true ? <FadeLoader color='white' css={override} height={8} width={2} margin={-4}/> : <p>Register</p>}
+          </button>
 
+        </form>
           <button className='toggle-button col-span-2 w-fit mx-auto mb-2 gap-1 flex flex-row' 
             onClick={props.toggle}>Already registered?  
             <p className='text-[#5DA700]'>Sign In here </p></button>
-        </form>
+      </>
     )
   };

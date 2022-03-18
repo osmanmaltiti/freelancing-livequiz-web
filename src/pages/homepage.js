@@ -1,10 +1,25 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { FeaturedQuizCardAlt, ResultCardAlt } from '../components/landing-page-cards';
 import banner from '../Assets/Banner Image.png';
 import { useNavigate } from 'react-router-dom';
+import Competition from '../API/GET-competition';
+import { useDispatch, useSelector } from 'react-redux';
+import { setCompetition } from '../redux/competition-slice';
 
 const Homepage = () => {
     const navigate = useNavigate();
+    const dispatch = useDispatch();
+    const { getCompetitions } = Competition();
+    const [ user, setUser ] = useState();
+    const comps = useSelector(state => state.competition.allCompetition);
+    
+    useEffect(() => {
+        getCompetitions();
+        let currentUser = localStorage.getItem("currentUser");
+        setUser(currentUser);
+        //eslint-disable-next-line
+    }, []);
+
   return (
     <div className='w-full flex-grow flex flex-col bg-[#959595]'>
         <span className='relative'>
@@ -28,7 +43,18 @@ const Homepage = () => {
             </div>
 
         <div className='grid flex-col grid-cols-2 lg:grid-cols-3 bg-[#E8E8E8] pt-4 pb-16 px-2 w-full lg:mx-auto lg:px-[10%] gap-2 lg:grid'>
-            {[1,2,3,4,5,6].map(item => <FeaturedQuizCardAlt key={item}/>)}
+            {comps.map(item => 
+                <FeaturedQuizCardAlt 
+                    key={item.id}
+                    image={item.img}
+                    title={item.title}
+                    price={item.price}
+                    id={item.id}
+                    navigate={() => {
+                        dispatch(setCompetition(item.id));
+                        navigate('/competitiondetail')
+                    }}
+                    />)}
         </div>
         </span>
         <div className='w-full py-4 flex text-white flex-col items-center'>
@@ -36,7 +62,7 @@ const Homepage = () => {
             <p className='text-3xl'>Exciting Prizes</p>
             <p className='text-2xl mt-2'>Sign Up to Compete</p>
             <p className='text-2xl'>with the World</p>
-            <button className='bg-[#0361CC] p-3 px-12 text-white mt-2' onClick={() => navigate('/signin')}>SIGN UP</button>
+            <button className={`${user ? 'hidden' : 'flex'} bg-[#0361CC] p-3 px-12 text-white mt-2`} onClick={() => navigate('/signin')}>SIGN UP</button>
         </div>
 
         <span className='w-full relative pt-14 pb-32 flex flex-col bg-[#E8E8E8]'>
