@@ -1,6 +1,6 @@
 import React from 'react';
-import { useNavigate } from 'react-router-dom';
 import image from '../Assets/R (1).png';
+import { useNavigate } from 'react-router-dom';
 import '../styles/cards.css';
 
 export const FeaturedQuizCard = () => {
@@ -52,7 +52,6 @@ export const ResultCard = () => {
 }
 
 export const FeaturedQuizCardAlt = (props) => {
-  const navigate = useNavigate();
   return (
     <div id='alt-featured-card' className='flex flex-col text-white items-center rounded-xl overflow-hidden'>
         <span className='h-full w-full grid place-items-center ml-auto pt-4'>

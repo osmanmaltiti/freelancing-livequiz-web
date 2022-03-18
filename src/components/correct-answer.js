@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import wrong from '../Assets/cancel.png';
 import correct from '../Assets/check-mark.png';
 import avatar from '../Assets/avatar.png';

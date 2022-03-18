@@ -24,6 +24,7 @@ const QuizArea = () => {
       navigate('/results')
     }
     return () => clearInterval(interval);
+    //eslint-disable-next-line
   }, [next])
 
   const timer = () => {

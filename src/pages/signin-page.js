@@ -9,7 +9,6 @@ import { useNavigate } from 'react-router-dom';
 
 const SignIn = () => {
     const [ toggle, setToggle ] = useState(false);
-    const [ loading, setLoading ] = useState(false);
 
     return (
       <div id='main-signin' className='w-screen h-screen flex flex-col bg-blue-50 md:bg-lightblue overflow-y-auto scrollbar-thin'>
