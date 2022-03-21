@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState, useEffect} from 'react';
 import image from '../Assets/R (1).png';
 import { useNavigate } from 'react-router-dom';
 import '../styles/cards.css';
@@ -52,6 +52,25 @@ export const ResultCard = () => {
 }
 
 export const FeaturedQuizCardAlt = (props) => {
+  const [timeLeft, setTimeLeft] = useState({});
+
+  useEffect(() => {
+      const timer = setTimeout(() => {
+          let difference = new Date(props.date) - new Date();
+          let timeLeft = {};
+          if (difference > 0) {
+              timeLeft = {
+                  hours: Math.floor((difference / (1000 * 60 * 60)) % 24),
+                  minutes: Math.floor((difference / 1000 / 60) % 60),
+                  seconds: Math.floor((difference / 1000) % 60)
+              };
+          }
+          setTimeLeft(timeLeft);
+      }, 1000);
+
+      return () => clearTimeout(timer);
+    })
+
   return (
     <div id='alt-featured-card' className='flex flex-col text-white items-center rounded-xl overflow-hidden'>
         <span className='h-full w-full grid place-items-center ml-auto pt-4'>
@@ -63,15 +82,21 @@ export const FeaturedQuizCardAlt = (props) => {
           <p className='font-medium text-sm md:text-base text-center md:font-semibold'>MARCH 03, 2022 - 6:00 PM</p>
           <div className='flex flex-row gap-2'>
             <div className='flex flex-col items-center'>
-              <h2 className='time text-lg md:text-2xl font-bold'>02</h2>
+              <h2 className='time text-lg md:text-2xl font-bold'>
+                {timeLeft.hours === undefined ? '00' : timeLeft.hours > 9 ? timeLeft.hours : '0'+ timeLeft.hours}
+              </h2>
               <p className='time text-sm'>hours</p>
             </div>
             <div className='flex flex-col items-center'>
-              <h2 className='time text-lg md:text-2xl font-bold'>20</h2>
+              <h2 className='time text-lg md:text-2xl font-bold'>
+                {timeLeft.minutes === undefined ? '00' : timeLeft.minutes > 9 ? timeLeft.minutes : '0'+ timeLeft.minutes}
+              </h2>
               <p className='time text-sm'>minutes</p>
             </div>
             <div className='flex flex-col items-center'>
-              <h2 className='time text-lg md:text-2xl font-bold'>01</h2>
+              <h2 className='time text-lg md:text-2xl font-bold'>
+                {timeLeft.seconds === undefined ? '00' : timeLeft.seconds > 9 ? timeLeft.seconds : '0'+ timeLeft.seconds}
+              </h2>
               <p className='time text-sm'>seconds</p>
             </div>
           </div>

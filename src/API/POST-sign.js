@@ -9,7 +9,8 @@ const Sign = () => {
     }
     const response = await axios.post('http://35.243.146.103:3001/login', 
     { ...login_data });
-
+    
+    console.log(response)
     localStorage.setItem("token", JSON.stringify(response.data.token));
     const user = { ...response.data };
     delete user.token;
@@ -29,7 +30,8 @@ const Sign = () => {
     }
     const response = await axios.post('http://35.243.146.103:3001/registration',
     { ...signup_data });
-
+    
+    console.log(response)
     localStorage.setItem("token", JSON.stringify(response.data.token));
     localStorage.setItem("currentUser", JSON.stringify(response.data.data));
     callback();

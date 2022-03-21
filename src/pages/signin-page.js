@@ -25,8 +25,8 @@ export default SignIn;
 const Login = (props) => {
     const { validateLogin } = Validate();
     const { login } = Sign();
-    const [ loading, setLoading ] = useState(false);
     const navigate = useNavigate();
+    const [ loading, setLoading ] = useState(false);
     const override = css`
       display: block;
       margin: 0 auto;

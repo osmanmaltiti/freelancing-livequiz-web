@@ -13,6 +13,7 @@ const Homepage = () => {
     const [ user, setUser ] = useState();
     const comps = useSelector(state => state.competition.allCompetition);
     
+    
     useEffect(() => {
         getCompetitions();
         let currentUser = localStorage.getItem("currentUser");
@@ -49,12 +50,15 @@ const Homepage = () => {
                     image={item.img}
                     title={item.title}
                     price={item.price}
+                    date = {item.start_dt}
                     id={item.id}
                     navigate={() => {
                         dispatch(setCompetition(item.id));
                         navigate('/competitiondetail')
                     }}
-                    />)}
+                    />
+                    )
+                }
         </div>
         </span>
         <div className='w-full py-4 flex text-white flex-col items-center'>
