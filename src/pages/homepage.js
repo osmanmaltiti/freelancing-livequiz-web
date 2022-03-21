@@ -5,17 +5,20 @@ import { useNavigate } from 'react-router-dom';
 import Competition from '../API/GET-competition';
 import { useDispatch, useSelector } from 'react-redux';
 import { setCompetition } from '../redux/competition-slice';
+import Results from '../API/GET-results';
 
 const Homepage = () => {
     const navigate = useNavigate();
     const dispatch = useDispatch();
     const { getCompetitions } = Competition();
+    const { getLeaderboards } = Results();
     const [ user, setUser ] = useState();
     const comps = useSelector(state => state.competition.allCompetition);
-    
+    const leaderboard = useSelector(state => state.results.leaderboard)
     
     useEffect(() => {
         getCompetitions();
+        getLeaderboards();
         let currentUser = localStorage.getItem("currentUser");
         setUser(currentUser);
         //eslint-disable-next-line
@@ -79,7 +82,12 @@ const Homepage = () => {
             </div>
 
             <div className='grid grid-cols-2 mt-5 flex-col w-full bg-[#E8E8E8] lg:mx-auto lg:px-[10%] lg:grid lg:grid-cols-2 lg:gap-2'>
-                {[1,2,3,4].map(item => <ResultCardAlt key={item}/>)}
+                {leaderboard.map(item => 
+                    <ResultCardAlt 
+                        key={item.id}
+                        name={item.user_name}
+                        img={item.user_pic}
+                        score={item.user_score} />)}
             </div>
         </span>        
 

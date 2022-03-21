@@ -54,6 +54,20 @@ export const ResultCard = () => {
 export const FeaturedQuizCardAlt = (props) => {
   const [timeLeft, setTimeLeft] = useState({});
 
+  const quizDate = (date) => {
+    const days = new Date(date);
+    let year = days.getFullYear();
+    let month = days.getMonth();
+    let day = days.getDate();
+    
+    let time = days.toLocaleString('en-US', { hour: 'numeric', minute: 'numeric', hour12: true })
+    return { year, month, day, time}
+  }
+  const monthNames = ["January", "February", "March", "April", "May", "June",
+  "July", "August", "September", "October", "November", "December"
+  ];
+  const {year, month, day, time} = quizDate(props.date);
+  
   useEffect(() => {
       const timer = setTimeout(() => {
           let difference = new Date(props.date) - new Date();
@@ -79,7 +93,8 @@ export const FeaturedQuizCardAlt = (props) => {
           <p className='text-base md:text-xl text-center lg:text-2xl font-bold'>PRIZE POOL: ${props.price}</p>
         </span>
         <div className='h-full flex flex-col gap-1 p-2 w-full bg-black items-center'>
-          <p className='font-medium text-sm md:text-base text-center md:font-semibold'>MARCH 03, 2022 - 6:00 PM</p>
+          <p className='font-medium text-sm md:text-base text-center md:font-semibold'>
+            {monthNames[month]} {day}, {year} - {time}</p>
           <div className='flex flex-row gap-2'>
             <div className='flex flex-col items-center'>
               <h2 className='time text-lg md:text-2xl font-bold'>
@@ -108,14 +123,14 @@ export const FeaturedQuizCardAlt = (props) => {
   )
 }
 
-export const ResultCardAlt = () => {
+export const ResultCardAlt = (props) => {
   return (
       <div id='alt-results-card' className='grid grid-cols-40/60 place-items-center py-2 m-2 rounded-xl border-2 border-[#707070]'>
-          <span className='h-[90%] flex flex-col w-[70%] border-r border-black'>
-            <img alt='' src={ image } className='w-[7rem] m-auto'/>
+          <span className='h-[90%] flex flex-col w-[70%] border-r pr-4'>
+            <img alt='' src={ props.img } className='w-[7rem] m-auto'/>
           </span>
           <span className='h-fit py-2 w-full flex flex-col'>
-            <h2 className='text-2xl lg:text-3xl font-bold'>Umar</h2>
+            <h2 className='text-2xl lg:text-3xl font-bold'>{props.name}</h2>
             <h2>Pakistan</h2>
             <p className='text-sm lg:text-lg'>Prize Won: $500</p>
             <h2 className='mt-1 font-medium text-sm lg:txt-base'>March 03, 2020</h2>
