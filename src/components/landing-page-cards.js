@@ -71,7 +71,6 @@ export const FeaturedQuizCardAlt = (props) => {
   useEffect(() => {
       const timer = setTimeout(() => {
         let difference = new Date(props.date) - new Date();
-        console.log(difference)
           let timeleft = {};
           if (difference > 0) {
               timeleft = {
