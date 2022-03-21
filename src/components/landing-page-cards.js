@@ -70,11 +70,11 @@ export const FeaturedQuizCardAlt = (props) => {
 
   useEffect(() => {
       const timer = setTimeout(() => {
-        let difference = new Date(props.date) - new Date();
+        let difference = +new Date(props.date) - +new Date();
           let timeleft = {};
           if (difference > 0) {
               timeleft = {
-                  hours: Math.floor((difference / (1000 * 60 * 60)) % 24),
+                  hours: Math.floor((difference / (1000 * 60 * 60))),
                   minutes: Math.floor((difference / 1000 / 60) % 60),
                   seconds: Math.floor((difference / 1000) % 60)
               };
@@ -97,7 +97,7 @@ export const FeaturedQuizCardAlt = (props) => {
           <div className='flex flex-row gap-2'>
             <div className='flex flex-col items-center'>
               <h2 className='time text-lg md:text-2xl font-bold'>
-              {timeLeft.hours === undefined ? '00' : timeLeft.hours > 9 ? timeLeft.hours : '0'+ timeLeft.hours}
+              {timeLeft.hours === undefined ? '00' : (timeLeft.hours) > 9 ? (timeLeft.hours) : '0'+ (timeLeft.hours)}
               </h2>
               <p className='time text-sm'>hours</p>
             </div>

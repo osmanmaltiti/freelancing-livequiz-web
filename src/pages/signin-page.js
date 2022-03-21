@@ -6,6 +6,7 @@ import Sign from '../API/POST-sign';
 import { FadeLoader } from 'react-spinners';
 import { css } from '@emotion/react';
 import { useNavigate } from 'react-router-dom';
+import { IoAlertCircleOutline } from 'react-icons/io5';
 
 const SignIn = () => {
     const [ toggle, setToggle ] = useState(false);
@@ -67,7 +68,8 @@ const Login = (props) => {
                 onChange={formik.handleChange}
                 onBlur={formik.handleBlur}
             />
-            { formik.errors.email ? <div className='absolute right-2 top-10 text-sm text-red-500 italic'>{formik.errors.email}</div>: null }
+            { formik.errors.email ? <div className='absolute right-2 top-10 text-xl text-red-500 italic'><IoAlertCircleOutline/></div>: null }
+            { formik.errors.email ? <div className=' text-right top-10 text-sm text-red-500 italic'>{formik.errors.email}</div>: null }
           </label>
           <label htmlFor="FirstName" className='w-full relative self-start m-0 text-lg'>
             <p className=' text-lg font-semibold text-[#36413E]'>Password</p>
@@ -189,7 +191,8 @@ const SignUp = (props) => {
               type='email'
               placeholder='Enter your email'
             />
-            { formik.errors.Email ? <div className='text-sm absolute right-2 top-10 text-red-500 italic'>{ formik.errors.Email }</div> : null }
+            { formik.errors.Email ? <div className='text-xl absolute right-2 top-10 text-red-500 italic'><IoAlertCircleOutline/></div> : null }
+            { formik.errors.Email ? <div className='text-sm text-right text-red-500 italic'>{ formik.errors.Email }</div> : null }
           </label>
         {/* NUMBER */}
           <label htmlFor="Number" className='w-full relative self-start m-0 text-sm'>
@@ -231,7 +234,8 @@ const SignUp = (props) => {
               type='password' 
               placeholder='Confirm Password'
             />
-            { formik.errors.Confirm ? <div className='text-sm absolute right-2 top-10 text-red-500 italic'>{ formik.errors.Confirm }</div> : null }
+            { formik.errors.Confirm ? <div className='text-xl absolute right-2 top-10 text-red-500 italic'><IoAlertCircleOutline/></div> : null }
+            { formik.errors.Confirm ? <div className='text-sm text-right top-10 text-red-500 italic'>{ formik.errors.Confirm }</div> : null }
           </label>
           
         {/* SUBMIT BUTTON */}

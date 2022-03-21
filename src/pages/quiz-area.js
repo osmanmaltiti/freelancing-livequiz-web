@@ -3,6 +3,8 @@ import { CorrectAnswer, MiniLeaderboard, QuestionCard, WrongAnswer } from '../co
 import QuizFunctions from '../functions/quiz-function';
 import { server } from '../fake-server/server';
 import { useNavigate } from 'react-router-dom';
+import Results from '../API/GET-results';
+import { useSelector } from 'react-redux';
 
 const QuizArea = () => {
   const { verifyAnswer } = QuizFunctions();
@@ -14,8 +16,11 @@ const QuizArea = () => {
   const [round, setRound] = useState(1);
   const [next, setNext] = useState(false);
   const [popup, setPopup] = useState(true);
+  const { getCurrentResults } = Results();
+  const comp = useSelector(state => state.competition.currentCompetition);
 
   useEffect(() => {
+    getCurrentResults();
     setQuizCard(!quizCard);
     setAnswer('');
     setPopup(!popup)
@@ -48,7 +53,7 @@ const QuizArea = () => {
       <div className={`${quizCard ? 'grid-cols-3 ': 'grid-cols-2'} grid lg:grid-cols-2 w-full lg:place-items-center`}>
         <span className='flex flex-col text-white lg:text-black items-center'>
           <p>Score</p>
-          <h2 className='text-3xl font-bold '>15000</h2>
+          <h2 className='text-3xl font-bold '>0</h2>
         </span>
         <span className={`${quizCard ? 'flex': 'hidden'} flex-col items-center lg:hidden top-24`}>
           <div className='grid place-items-center h-[5rem] aspect-square rounded-full bg-blue-500'>
@@ -57,7 +62,7 @@ const QuizArea = () => {
         </span>
         <span className='flex flex-col items-center text-white lg:text-black lg:justify-self-center'>
           <p>Prize Money</p>
-          <h2 className='text-3xl font-bold'>$1000</h2>
+          <h2 className='text-3xl font-bold'>${comp.price}</h2>
         </span>
       </div>
 

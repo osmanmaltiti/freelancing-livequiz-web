@@ -1,7 +1,7 @@
 import React from 'react';
 import wrong from '../Assets/cancel.png';
 import correct from '../Assets/check-mark.png';
-import avatar from '../Assets/avatar.png';
+import { useSelector } from 'react-redux';
 
 export const QuestionCard = (props) => {
   return(
@@ -71,6 +71,7 @@ export const WrongAnswer = () => {
   )
 }
 export const MiniLeaderboard = () => {
+  const currentResults = useSelector(state => state.results.results);
   return (
     <div className='w-[90%] lg:w-[45%] bg-white  p-4 mb-8 flex flex-col items-center mx-auto'>
         <p className='text-3xl mb-8 text-[#36413E]'>Leader Board</p>
@@ -79,13 +80,13 @@ export const MiniLeaderboard = () => {
           <p className='justify-self-end'>Score</p>
         </div>
         {
-          [1,2,3,4].map(item => <div key={item} className='w-[90%] grid py-2 grid-cols-2 border-b border-b-gray-400 border-t border-t-gray-400 font-bold'>
+          currentResults.map((item, index) => <div key={item.id} className='w-[90%] grid py-2 grid-cols-2 border-b border-b-gray-400 border-t border-t-gray-400 font-bold'>
             <span className='flex flex-row gap-2 items-center'>
-              <p className='font-medium'>{item}</p>
-              <img alt='' className='w-[2.5rem] h-[2.5rem] rounded-full' src={avatar}/>
-              <p>Ahsan</p>
+              <p className='font-medium'>{index}</p>
+              <img alt='' className='w-[2.5rem] h-[2.5rem] rounded-full object-cover' src={item.user_pic}/>
+              <p>{item.user_name}</p>
             </span>
-            <p className='justify-self-end'>119,600</p>
+            <p className='justify-self-end'>{item.user_score}</p>
           </div>)
         }
         
