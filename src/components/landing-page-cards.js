@@ -98,19 +98,19 @@ export const FeaturedQuizCardAlt = (props) => {
           <div className='flex flex-row gap-2'>
             <div className='flex flex-col items-center'>
               <h2 className='time text-lg md:text-2xl font-bold'>
-                {timeLeft.hours === undefined ? '00' : timeLeft.hours > 9 ? timeLeft.hours : '0'+ timeLeft.hours}
+                {timeLeft.hours}
               </h2>
               <p className='time text-sm'>hours</p>
             </div>
             <div className='flex flex-col items-center'>
               <h2 className='time text-lg md:text-2xl font-bold'>
-                {timeLeft.minutes === undefined ? '00' : timeLeft.minutes > 9 ? timeLeft.minutes : '0'+ timeLeft.minutes}
+                {timeLeft.minutes}
               </h2>
               <p className='time text-sm'>minutes</p>
             </div>
             <div className='flex flex-col items-center'>
               <h2 className='time text-lg md:text-2xl font-bold'>
-                {timeLeft.seconds === undefined ? '00' : timeLeft.seconds > 9 ? timeLeft.seconds : '0'+ timeLeft.seconds}
+                {timeLeft.seconds}
               </h2>
               <p className='time text-sm'>seconds</p>
             </div>
