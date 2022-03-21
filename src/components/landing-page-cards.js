@@ -67,24 +67,24 @@ export const FeaturedQuizCardAlt = (props) => {
   "July", "August", "September", "October", "November", "December"
   ];
   const {year, month, day, time} = quizDate(props.date);
-  
+
   useEffect(() => {
       const timer = setTimeout(() => {
-          let difference = new Date(props.date) - new Date();
-          let timeLeft = {};
+        let difference = new Date(props.date) - new Date();
+        console.log(difference)
+          let timeleft = {};
           if (difference > 0) {
-              timeLeft = {
+              timeleft = {
                   hours: Math.floor((difference / (1000 * 60 * 60)) % 24),
                   minutes: Math.floor((difference / 1000 / 60) % 60),
                   seconds: Math.floor((difference / 1000) % 60)
               };
           }
-          setTimeLeft(timeLeft);
+          setTimeLeft(timeleft);
       }, 1000);
 
       return () => clearTimeout(timer);
     })
-
   return (
     <div id='alt-featured-card' className='flex flex-col text-white items-center rounded-xl overflow-hidden'>
         <span className='h-full w-full grid place-items-center ml-auto pt-4'>
@@ -98,19 +98,19 @@ export const FeaturedQuizCardAlt = (props) => {
           <div className='flex flex-row gap-2'>
             <div className='flex flex-col items-center'>
               <h2 className='time text-lg md:text-2xl font-bold'>
-                {timeLeft.hours}
+              {timeLeft.hours === undefined ? '00' : timeLeft.hours > 9 ? timeLeft.hours : '0'+ timeLeft.hours}
               </h2>
               <p className='time text-sm'>hours</p>
             </div>
             <div className='flex flex-col items-center'>
               <h2 className='time text-lg md:text-2xl font-bold'>
-                {timeLeft.minutes}
+              {timeLeft.minutes === undefined ? '00' : timeLeft.minutes > 9 ? timeLeft.minutes : '0'+ timeLeft.minutes}
               </h2>
               <p className='time text-sm'>minutes</p>
             </div>
             <div className='flex flex-col items-center'>
               <h2 className='time text-lg md:text-2xl font-bold'>
-                {timeLeft.seconds}
+              {timeLeft.seconds === undefined ? '00' : timeLeft.seconds > 9 ? timeLeft.seconds : '0'+ timeLeft.seconds}
               </h2>
               <p className='time text-sm'>seconds</p>
             </div>

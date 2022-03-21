@@ -84,21 +84,21 @@ const CompetitionDetail = () => {
             <span className='flex flex-col items-center '>
                 <p>Hours</p>
                 <p className='text-4xl font-bold'>
-                    {timeLeft.hours}
+                {timeLeft.hours === undefined ? '00' : timeLeft.hours > 9 ? timeLeft.hours : '0'+ timeLeft.hours}
                 </p>
             </span>
             <p className='row-span-2 text-4xl font-bold self-end'>:</p>
             <span className='flex flex-col items-center'>
                 <p>Minutes</p>
                 <p className='text-4xl font-bold'>
-                    {timeLeft.minutes}
+                {timeLeft.minutes === undefined ? '00' : timeLeft.minutes > 9 ? timeLeft.minutes : '0'+ timeLeft.minutes}
                 </p>
             </span>
             <p className='row-span-2 text-4xl font-bold self-end'>:</p>
             <span className='flex flex-col items-center'>
                 <p>Seconds</p>
                 <p className='text-4xl font-bold'>
-                    {timeLeft.seconds}
+                {timeLeft.seconds === undefined ? '00' : timeLeft.seconds > 9 ? timeLeft.seconds : '0'+ timeLeft.seconds}
                 </p>
             </span>
         </div>
