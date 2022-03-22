@@ -56,8 +56,12 @@ const Homepage = () => {
                     date = {item.start_dt}
                     id={item.id}
                     navigate={() => {
-                        dispatch(setCompetition(item.id));
-                        navigate('/competitiondetail')
+                        if(user){
+                            dispatch(setCompetition(item.id));
+                            navigate('/competitiondetail')
+                        } else {
+                            navigate('/signin')
+                        }
                     }}
                     />
                     )
