@@ -45,8 +45,12 @@ const Login = (props) => {
       validate: validateLogin,
       onSubmit: (values) => {
         setLoading(!loading)
-        login(values, () => {
-          navigate('/');
+        login(values, (response) => {
+          setLoading(false)
+          if(response) {
+            alert(response.message)
+          }
+          else navigate('/');
         });
       }
     });

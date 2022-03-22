@@ -10,12 +10,14 @@ const Sign = () => {
     const response = await axios.post('http://35.243.146.103:3001/login', 
     { ...login_data });
     
-    console.log(response)
-    localStorage.setItem("token", JSON.stringify(response.data.token));
-    const user = { ...response.data };
-    delete user.token;
-    localStorage.setItem("currentUser", JSON.stringify(user));
-    callback();
+    if(response.data.token !== undefined){
+      localStorage.setItem("token", JSON.stringify(response.data.token));
+      const user = { ...response.data };
+      delete user.token;
+      localStorage.setItem("currentUser", JSON.stringify(user));
+      callback();
+    } 
+    else callback(response.data)
   }
 
   const signup = async(data, callback) => {
@@ -31,7 +33,6 @@ const Sign = () => {
     const response = await axios.post('http://35.243.146.103:3001/registration',
     { ...signup_data });
     
-    console.log(response)
     localStorage.setItem("token", JSON.stringify(response.data.token));
     localStorage.setItem("currentUser", JSON.stringify(response.data.data));
     callback();
