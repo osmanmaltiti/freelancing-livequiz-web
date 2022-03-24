@@ -8,7 +8,7 @@ export const QuestionCard = (props) => {
   <>
       <span className='hidden lg:flex flex-col items-center lg:absolute -top-10'>
           <div className='grid place-items-center h-[5rem] aspect-square rounded-full bg-[#0084A4]'>
-            <p className='text-2xl font-bold text-white'>00:{props.counter > 9 ? props.counter : '0'+ props.counter}</p>
+            {/* <p className='text-2xl font-bold text-white'>00:{props.counter > 9 ? props.counter : '0'+ props.counter}</p> */}
           </div>
         </span>
         <p className='text-2xl font-semibold text-[#0084A4]'>ROUND {props.round}</p>
@@ -16,15 +16,15 @@ export const QuestionCard = (props) => {
         <span className='w-full flex flex-col gap-2 items-center lg:grid lg:grid-cols-2 lg:place-items-center'>
           {
             props.options.map((option, index) => 
-                <label key={option.name} htmlFor={option.name} className=' w-3/4 lg:w-[95%] flex flex-row items-center justify-center rounded-full h-[3.5rem] mt-1 bg-[#F2F2F2] shadow-md  hover:cursor-pointer'>
+                <label key={option.id} htmlFor={option.id} className=' w-3/4 lg:w-[95%] flex flex-row items-center justify-center rounded-full h-[3.5rem] mt-1 bg-[#F2F2F2] shadow-md  hover:cursor-pointer'>
                   <input className='absolute'
-                        id={option.name} 
+                        id={option.id} 
                         type='radio' 
                         name={props.round}
-                        value={option.name}
+                        value={option.text}
                         onChange={props.setAnswer} />
                   <span className='text-base text-black font-bold rounded-full flex flex-col border border-black w-full h-full items-center opacity-60 option'>
-                    <p className='m-auto'>{option.name}</p>
+                    <p className='m-auto'>{option.text}</p>
                   </span>
                 </label>)
           }

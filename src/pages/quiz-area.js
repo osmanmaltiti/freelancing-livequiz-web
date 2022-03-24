@@ -7,46 +7,29 @@ import Results from '../API/GET-results';
 import { useSelector } from 'react-redux';
 
 const QuizArea = () => {
-  const { verifyAnswer } = QuizFunctions();
   const navigate = useNavigate();
   const [answer, setAnswer] = useState('');
   const [quizCard, setQuizCard] = useState(false);
-  const [results, setResults] = useState('');
-  const [counter, setCounter] = useState(15)
   const [round, setRound] = useState(1);
   const [next, setNext] = useState(false);
+  const [question, setQuestions] = useState([]);
   const [popup, setPopup] = useState(true);
   const { getCurrentResults } = Results();
   const comp = useSelector(state => state.competition.currentCompetition);
+  const socket = useSelector(state => state.socket.socket);
 
   useEffect(() => {
-    getCurrentResults();
-    setQuizCard(!quizCard);
-    setAnswer('');
-    setPopup(!popup)
-    const interval = setInterval(() => { setCounter(prev => prev >= 0 ? prev - 1: 0) }, 1000); 
-    if(round > server.length){
-      navigate('/results')
-    }
-    return () => clearInterval(interval);
-    //eslint-disable-next-line
-  }, [next])
+      socket.emit("current-question-number", round);
+      socket.emit("new-quest", round);
+      setRound(prev => prev + 1);
+  }, [])
 
-  const timer = () => {
-    verifyAnswer(answer, (option) => {
-        setQuizCard(!quizCard);
-        setRound(prev => prev + 1)
-        setResults(option);
-        setCounter(20)
-
-        setTimeout(() => {
-          setNext(!next);
-        }, 5000)
-      }
-    )
+  if(typeof socket !== 'undefined'){
+    socket.on("questions", ({ questions, time }) => {
+      console.log(questions)
+      setQuestions(questions)
+    })
   }
-  if( counter === 0 ) timer();
-
   
   return (
     <div id='main-quiz' className='flex-grow flex flex-col gap-4 py-4 w-full mx-auto'>
@@ -57,7 +40,7 @@ const QuizArea = () => {
         </span>
         <span className={`${quizCard ? 'flex': 'hidden'} flex-col items-center lg:hidden top-24`}>
           <div className='grid place-items-center h-[5rem] aspect-square rounded-full bg-blue-500'>
-            <p className='text-2xl font-bold text-white'>00:{counter > 9 ? counter : '0'+ counter}</p>
+            {/* <p className='text-2xl font-bold text-white'>00:{counter > 9 ? counter : '0'+ counter}</p> */}
           </div>
         </span>
         <span className='flex flex-col items-center text-white lg:text-black lg:justify-self-center'>
@@ -67,22 +50,22 @@ const QuizArea = () => {
       </div>
 
       {
-        server.map((question, index) => 
-          <div key={question.id} className={`${quizCard ? 'flex': 'hidden'} ${round === index + 1 ? 'flex' : 'hidden'} relative w-[90%] lg:w-[50%] bg-white p-4 lg:pt-10 mb-8 gap-2 rounded-2xl flex-col items-center mx-auto`}>
+        question.map((item, index) => 
+          <div key={item.id} className={`${quizCard ? 'flex': 'flex'} ${round === index + 1 ? 'flex' : 'flex'} relative w-[90%] lg:w-[50%] bg-white p-4 lg:pt-10 mb-8 gap-2 rounded-2xl flex-col items-center mx-auto`}>
               <QuestionCard 
-                    counter={counter} 
+                    // counter={counter} 
                     setAnswer={(e) => {
                       setAnswer(e.target.value)
                       setPopup(!popup)
                     }}
-                    quiz={question.question}
-                    options={question.options}
+                    quiz={item.text}
+                    options={item.choices}
                     round={index + 1}
                     pop = {popup}/>
           </div>)
       }
       {/* RESULTS */}
-      {
+      {/* {
         results === 'correct' ? 
           <span className={`${quizCard ? 'hidden': 'flex flex-col' }`}>
             <CorrectAnswer/>
@@ -95,7 +78,7 @@ const QuizArea = () => {
           </span>
           
         : null
-      }
+      } */}
     </div>
   )
 }
