@@ -7,6 +7,7 @@ import Homepage from './pages/homepage';
 import QuizArea from './pages/quiz-area';
 import SignIn from './pages/signin-page';
 import Protected from './components/protected';
+import Lobby from './pages/Lobby';
 
 const Routing = () => {
   return (
@@ -24,6 +25,10 @@ const Routing = () => {
         <Route path='/results' 
         element={<Protected>
                   <Layout><Winner/></Layout>
+                </Protected>}/>
+        <Route path='/lobby' 
+        element={<Protected>
+                  <Layout><Lobby/></Layout>
                 </Protected>}/>
     </Routes>
   )
