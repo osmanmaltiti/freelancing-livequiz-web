@@ -3,7 +3,8 @@ import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { io } from 'socket.io-client';
 import { setGlobalSocket } from '../redux/socket-slice';
- 
+import { useSelector } from 'react-redux';
+
 const Lobby = () => {
   const [time, setTime] = useState();
   const [ctrl] = useState();
@@ -11,8 +12,12 @@ const Lobby = () => {
   const [intervalState, setIntervalState] = useState();
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const [user, setUser] = useState();
+  const comp = useSelector(state => state.competition.currentCompetition);
 
   useEffect(() => {
+    const currentUser = JSON.parse(localStorage.getItem("currentUser"));
+    setUser(currentUser);
     const connect = io("http://localhost:5000");
     setSocket(connect)
     dispatch(setGlobalSocket(connect));
@@ -21,23 +26,19 @@ const Lobby = () => {
   }, [ctrl]);
 
   if(typeof socket !== 'undefined'){
-    socket.on("connect", () => {
+    socket.once("connect", () => {
       console.log(socket.id)
       
-      const createRoom = () => {
-        const roomname = 'Laliga';
-        const name = 'Zahir';
+      const joinRoom = () => {
+        const roomname = comp.title;
+        const name = user.first_name;
 
-        socket.emit("create-room", { room: roomname, name });
-      
-        socket.on("room-error", (data) => {
-          alert(data.message);
-        });
+        socket.emit("join-room", { room: roomname, name });
       }
-      createRoom();
+      joinRoom();
 
       setIntervalState(
-        setInterval(() =>{ 
+        setInterval(() => { 
           const getGameTime = () => {
             socket.emit("get-game-time");
             socket.once("result", (data) => {
@@ -47,6 +48,8 @@ const Lobby = () => {
           }
         getGameTime();
       }, 1000));
+
+      socket.on("players-joined", data => console.log(data));
 
       const next = () => {
         clearInterval(intervalState);

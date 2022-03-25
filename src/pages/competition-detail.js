@@ -52,7 +52,7 @@ const CompetitionDetail = () => {
         console.log(status)
         if(status === "100"){ 
             setOpen(!open);
-            navigate('/quiz');
+            navigate('/lobby');
         } else {
             setOpenPass(!openPass);
             setOpen(!open);

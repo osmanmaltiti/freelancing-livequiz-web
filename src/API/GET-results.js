@@ -6,8 +6,8 @@ const Results = () => {
   const dispatch = useDispatch()
 
   const getCurrentResults = async() => {
-    const response = await axios.get("http://35.243.146.103:3001/get_current_results?user_id=1&competition_id=1");
-    dispatch(getResults(response.data))
+    const response = await axios.get("http://localhost:5000/leaderboard");
+    dispatch(getResults(response.data.sort((a, b) => a.score - b.score, 0)))
   }
 
   const getLeaderboards = async() => {
