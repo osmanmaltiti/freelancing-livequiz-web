@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { FeaturedQuizCardAlt, ResultCardAlt } from '../components/landing-page-cards';
 import banner from '../Assets/Banner Image.png';
 import { useNavigate } from 'react-router-dom';
@@ -6,6 +6,7 @@ import Competition from '../API/GET-competition';
 import { useDispatch, useSelector } from 'react-redux';
 import { setCompetition } from '../redux/competition-slice';
 import Results from '../API/GET-results';
+import homeAudio from '../Assets/audio/home.mp3';
 
 const Homepage = () => {
     const navigate = useNavigate();
@@ -15,14 +16,33 @@ const Homepage = () => {
     const [ user, setUser ] = useState();
     const comps = useSelector(state => state.competition.allCompetition);
     const leaderboard = useSelector(state => state.results.leaderboard)
-    
+    const audioRef = useRef(null);
+    const mute = useSelector(state => state.mute.mute)
+
     useEffect(() => {
         getCompetitions();
         getLeaderboards();
         let currentUser = localStorage.getItem("currentUser");
         setUser(currentUser);
+        document.body.addEventListener('click', () => {
+            document.getElementById('comp-music').play();
+        })
         //eslint-disable-next-line
     }, []);
+
+    const mutedFunc = () => {
+        if(mute === true){
+          let state = {
+            muted: true
+          }
+          return state
+        } else {
+          let state = {
+            muted: false
+          }
+          return state
+        }
+      }
 
   return (
     <div className='w-full flex-grow flex flex-col bg-[#959595]'>
@@ -90,7 +110,9 @@ const Homepage = () => {
                         score={item.user_score} />)}
             </div>
         </span>        
-
+        <audio autoPlay ref={audioRef} loop hidden controlsList='nodownload' {...mutedFunc}>
+              <source src={homeAudio}/>
+        </audio>
     </div>
   )
 }

@@ -1,9 +1,10 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { CorrectAnswer, MiniLeaderboard, QuestionCard, WrongAnswer } from '../components/correct-answer';
 import { useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
+import quizAudio from '../Assets/audio/quiz_game.mp3';
 
-const QuizArea = () => {
+const QuizArea = (props) => {
   const navigate = useNavigate();
   const [answers, setAnswer] = useState({});
   const [quizCard, setQuizCard] = useState(false);
@@ -18,20 +19,32 @@ const QuizArea = () => {
   const [popup, setPopup] = useState(false);
   const [user, setUser] = useState();
   const [gameLength, setgameLength] = useState(2);
+  const socket = props.socket;
   const comp = useSelector(state => state.competition.currentCompetition);
-  const socket = useSelector(state => state.socket.socket);
-
+  const audioRef = useRef(null)
+  const mute = useSelector(state => state.mute.mute)
+  
   useEffect(() => {
     setUser(JSON.parse(localStorage.getItem('currentUser')));
+    document.getElementById('comp-music').play();
     setQuizCard(!quizCard);
     setAnswer('');
     setPopup(!popup);
     setResults(null);
     socket.emit("game-length");
-    socket.emit("new-question", round);
+    if(round < gameLength + 1) socket.emit("new-question", round);
+    else{ 
+      socket.disconnect();
+      navigate('/results')
+    }
     const counter = setInterval(() => { setTimer(prev => prev > 0 ? prev - 1: 0) }, 1000);
-    setTimeout(() => setCheck(!check), 15000)
-    return () => clearInterval(counter)
+    const timeout = setTimeout(() => setCheck(!check), 15000)
+    
+    return () => {
+      clearInterval(counter);
+      clearTimeout(timeout);
+    }
+    //eslint-disable-next-line
   }, [next]);
 
   socket.once("questions", ({ questions }) => {
@@ -53,10 +66,23 @@ const QuizArea = () => {
         setTimeout(() => setNext(!next), 5000);
       });
     }
-    if(timer == 0) verify();
-    
+    if(timer === 0) verify();
+    //eslint-disable-next-line
   }, [check])
 
+  const mutedFunc = () => {
+    if(mute === true){
+      let state = {
+        muted: true
+      }
+      return state
+    } else {
+      let state = {
+        muted: false
+      }
+      return state
+    }
+  }
   return (
     <div id='main-quiz' className='flex-grow flex flex-col gap-4 py-4 w-full mx-auto'>
       <div className={`${quizCard ? 'grid-cols-3 ': 'grid-cols-2'} grid lg:grid-cols-2 w-full lg:place-items-center`}>
@@ -105,6 +131,9 @@ const QuizArea = () => {
           
         : null
       }
+      <audio ref={audioRef} id='comp-music' autoPlay loop hidden controlsList='nodownload' {...mutedFunc()}>
+          <source src={quizAudio}/>
+      </audio>
     </div>
   )
 }

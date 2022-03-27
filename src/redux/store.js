@@ -1,13 +1,13 @@
 import { configureStore } from '@reduxjs/toolkit';
 import competitionSlice from './competition-slice';
 import resultsSlice from './results-slice';
-import socketSlice from './socket-slice';
+import muteSlice from './mute-slice';
 
 const store = configureStore({
   reducer: {
     competition: competitionSlice,
     results: resultsSlice,
-    socket: socketSlice
+    mute: muteSlice
   },
   middleware: (getDefaultMiddleware) => getDefaultMiddleware({
     serializableCheck: false

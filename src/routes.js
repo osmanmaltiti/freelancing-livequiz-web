@@ -4,7 +4,7 @@ import Layout from './components/layout';
 import Winner from './pages/results';
 import CompetitionDetail from './pages/competition-detail';
 import Homepage from './pages/homepage';
-import QuizArea from './pages/quiz-area';
+// import QuizArea from './pages/quiz-area';
 import SignIn from './pages/signin-page';
 import Protected from './components/protected';
 import Lobby from './pages/Lobby';
@@ -18,10 +18,10 @@ const Routing = () => {
         element={<Protected>
                   <Layout><CompetitionDetail/></Layout>
                 </Protected>}/>
-        <Route path='/quiz' 
+        {/* <Route path='/quiz' 
         element={<Protected>
                   <Layout><QuizArea/></Layout>
-                </Protected>}/>
+                </Protected>}/> */}
         <Route path='/results' 
         element={<Protected>
                   <Layout><Winner/></Layout>

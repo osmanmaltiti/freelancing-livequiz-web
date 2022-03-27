@@ -1,8 +1,9 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import Pass from '../API/POST-pass';
 import Competition from '../API/GET-competition';
+import quizAudio from '../Assets/audio/quiz_game.mp3';
 
 const CompetitionDetail = () => {
   const [ open, setOpen ] = useState(false);
@@ -12,6 +13,8 @@ const CompetitionDetail = () => {
   const { checkCompetition } = Competition();
   const comp = useSelector(state => state.competition.currentCompetition);
   const [timeLeft, setTimeLeft] = useState({});
+  const audioRef = useRef(null);
+  const mute = useSelector(state => state.mute.mute)
 
   useEffect(() => {
       const timer = setTimeout(() => {
@@ -32,7 +35,9 @@ const CompetitionDetail = () => {
 
   useEffect(() => {
       if(comp.length === 0) navigate('/');
-
+      document.body.addEventListener('click', () => {
+        document.getElementById('comp-music').play();
+      })
       //eslint-disable-next-line
   }, []);
 
@@ -73,6 +78,20 @@ const CompetitionDetail = () => {
             setOpen(!open);
         }
     })
+  }
+
+  const mutedFunc = () => {
+    if(mute === true){
+      let state = {
+        muted: true
+      }
+      return state
+    } else {
+      let state = {
+        muted: false
+      }
+      return state
+    }
   }
 
   return (
@@ -132,6 +151,9 @@ const CompetitionDetail = () => {
                 </span>
             </div>
         </div>
+        <audio ref={audioRef} id='comp-music' autoPlay loop controlsList='nodownload' hidden {...mutedFunc}>
+              <source src={quizAudio}/>
+        </audio>
     </div>
   )
 }

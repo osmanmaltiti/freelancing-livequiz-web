@@ -1,9 +1,11 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import wrong from '../Assets/cancel.png';
 import correct from '../Assets/check-mark.png';
 import { useSelector } from 'react-redux';
 import Results from '../API/GET-results';
 import avatar from '../Assets/avatar.png';
+import correctAudio from '../Assets/audio/correct.mp3';
+import wrongAudio from '../Assets/audio/wrong.mp3';
 
 export const QuestionCard = (props) => {
   return(
@@ -39,12 +41,28 @@ export const QuestionCard = (props) => {
 
 export const CorrectAnswer = (props) => {
   const [wait, setWait] = useState(props.timer);
+  const audioRef = useRef();
+  const mute = useSelector(state => state.mute.mute)
 
   useEffect(() => {
     const interval = setInterval(() => setWait(prev => prev > 0 ? prev - 1: 0), 1000);
-
+    document.getElementById('comp-music').play();
     return () => clearInterval(interval);
   },[])
+
+  const mutedFunc = () => {
+    if(mute === true){
+      let state = {
+        muted: true
+      }
+      return state
+    } else {
+      let state = {
+        muted: false
+      }
+      return state
+    }
+  }
 
   return (
     <div className='relative w-[75%] lg:w-[25rem] lg:aspect-square bg-white pt-10  p-4 mb-8 gap-2 rounded-2xl flex flex-col items-center mx-auto'>
@@ -56,21 +74,39 @@ export const CorrectAnswer = (props) => {
         <p className='text-3xl text-[#0084A4]'>ROUND {props.round}</p>
         <p className='text-xl'>Your Answer is Correct</p>
         <img src={correct} alt='' className='w-[7rem] aspect-square'/>
-        <p className='text-2xl font-medium'>12x500=6000</p>
         <p className='text-xl font-bold mt-4'>Next Question</p>
         <p className='text-4xl font-bold'>00:{wait > 9 ? wait : '0'+ wait}</p>
-      </div>
+        <audio ref={audioRef} id='comp-music' autoPlay controlsList='nodownload' hidden {...mutedFunc}>
+            <source src={correctAudio}/>
+        </audio>
+    </div>
   )
 }
 
 export const WrongAnswer = (props) => {
   const [wait, setWait] = useState(props.timer);
+  const audioRef = useRef();
+  const mute = useSelector(state => state.mute.mute)
 
   useEffect(() => {
     const interval = setInterval(() => setWait(prev => prev > 0 ? prev - 1: 0), 1000);
-
+    document.getElementById('comp-music').play();
     return () => clearInterval(interval);
-  },[])
+  },[]);
+
+  const mutedFunc = () => {
+    if(mute === true){
+      let state = {
+        muted: true
+      }
+      return state
+    } else {
+      let state = {
+        muted: false
+      }
+      return state
+    }
+  }
 
   return (
     <div className='relative w-[75%] lg:w-[25rem] lg:aspect-square bg-white pt-10 p-4 mb-8 gap-2 rounded-2xl flex flex-col items-center mx-auto'>
@@ -82,23 +118,34 @@ export const WrongAnswer = (props) => {
         <p className='text-3xl text-[#0084A4]'>ROUND {props.round}</p>
         <p className='text-xl'>Your Answer is Wrong</p>
         <img src={wrong} alt='' className='w-[4.5rem] aspect-square'/>
-        <p className='text-4xl font-bold'>0 Points</p>
         <p className='text-2xl font-bold mt-4'>Next Question</p>
         <p className='text-4xl font-bold'>00:{wait > 9 ? wait : '0'+ wait}</p>
+        <audio ref={audioRef} id='comp-music' autoPlay controlsList='nodownload' hidden {...mutedFunc}>
+          <source src={wrongAudio}/>
+        </audio>
       </div>
   )
 }
 export const MiniLeaderboard = () => {
   const { getCurrentResults } = Results();
   const currentResults = useSelector(state => state.results.results);
-  
+  const [ctrl] = useState();
+
   useEffect(() => {
-    const interval = setInterval(() => getCurrentResults() ,1000);
+    getCurrentResults();
 
-    return () => clearInterval(interval);
-  })
+    //eslint-disable-next-line
+  }, [ctrl])
 
-  
+  useEffect(() => {
+    const interval = setInterval(() => getCurrentResults(),
+    2000);
+
+    return () => clearInterval(interval)
+
+    //eslint-disable-next-line
+  }, [])
+
   return (
     <div className='w-[90%] lg:w-[45%] bg-white  p-4 mb-8 flex flex-col items-center mx-auto'>
         <p className='text-3xl mb-8 text-[#36413E]'>Leader Board</p>
@@ -109,11 +156,11 @@ export const MiniLeaderboard = () => {
         {
           currentResults.map((item, index) => <div key={item.user_name} className='w-[90%] grid py-2 grid-cols-2 border-b border-b-gray-400 border-t border-t-gray-400 font-bold'>
             <span className='flex flex-row gap-2 items-center'>
-              <p className='font-medium'>{index}</p>
+              <p className='font-medium'>{index + 1}</p>
               <img alt='' className='w-[2.5rem] h-[2.5rem] rounded-full object-cover' src={avatar}/>
               <p>{item.user_name}</p>
             </span>
-            <p className='justify-self-end'>{item.user_score}</p>
+            <p className='justify-self-end place-self-center'>{item.user_score}</p>
           </div>)
         }
         
