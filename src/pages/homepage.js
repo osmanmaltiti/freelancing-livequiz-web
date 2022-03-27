@@ -79,9 +79,8 @@ const Homepage = () => {
                         dispatch(setCompetition(item.id));
                         navigate('/competitiondetail')
                     }}
-                    />
-                    )
-                }
+                />)
+            }
         </div>
         </span>
         <div className='w-full py-4 flex text-white flex-col items-center'>
@@ -102,7 +101,7 @@ const Homepage = () => {
             </div>
 
             <div className='grid grid-cols-2 mt-5 flex-col w-full bg-[#E8E8E8] lg:mx-auto lg:px-[10%] lg:grid lg:grid-cols-2 lg:gap-2'>
-                {leaderboard.map(item => 
+                {leaderboard?.results?.map(item => 
                     <ResultCardAlt 
                         key={item.id}
                         name={item.user_name}
@@ -110,7 +109,7 @@ const Homepage = () => {
                         score={item.user_score} />)}
             </div>
         </span>        
-        <audio autoPlay ref={audioRef} loop hidden controlsList='nodownload' {...mutedFunc}>
+        <audio id='comp-music' autoPlay ref={audioRef} loop hidden controlsList='nodownload' {...mutedFunc()}>
               <source src={homeAudio}/>
         </audio>
     </div>

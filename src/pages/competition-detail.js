@@ -151,7 +151,7 @@ const CompetitionDetail = () => {
                 </span>
             </div>
         </div>
-        <audio ref={audioRef} id='comp-music' autoPlay loop controlsList='nodownload' hidden {...mutedFunc}>
+        <audio ref={audioRef} id='comp-music' autoPlay loop controlsList='nodownload' hidden {...mutedFunc()}>
               <source src={quizAudio}/>
         </audio>
     </div>
